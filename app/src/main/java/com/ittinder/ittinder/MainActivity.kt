@@ -50,5 +50,5 @@ class MainActivity : AppCompatActivity() {
             R.id.Chat -> Toast.makeText(this, "Opening chat", Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
+
     }
-}
