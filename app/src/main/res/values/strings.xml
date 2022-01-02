@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">ittinder</string>
+
+    <string name="app_name">IT Tinder</string>
+
     <string name="title_activity_main" />
 
 <!--login fragment-->
@@ -29,7 +31,5 @@
     <string name="doesnt_matter">Doesn\'t matter</string>
     <string name="programming_languages">Your programming languages:</string>
 <!--    TO DO-->
-
-
 
 </resources>
