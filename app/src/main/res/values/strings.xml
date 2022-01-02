@@ -1,6 +1,35 @@
 <resources>
     <string name="app_name">ittinder</string>
+    <string name="title_activity_main" />
+
+<!--login fragment-->
     <string name="email_address_hint">Email</string>
     <string name="next_button">Next</string>
     <string name="password_hint">Password</string>
+    <string name="login_background">login_background</string>
+    <string name="sign_in_or_create_account">Sign in or create account</string>
+
+<!--create account fragment-->
+    <string name="personal_details_question">Your personal details:</string>
+    <string name="account_details_question">Your account information:</string>
+    <string name="firstname">First name</string>
+    <string name="middlename">Middle name</string>
+    <string name="surname">Surname</string>
+    <string name="your_gender">Your gender</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="continue_option">continue</string>
+
+<!--preferences fragment-->
+    <string name="what_are_you_looking_for">What are you looking for?</string>
+    <string name="men">Men</string>
+    <string name="women">Women</string>
+    <string name="other">Other</string>
+    <string name="doesnt_matter">Doesn\'t matter</string>
+    <string name="programming_languages">Your programming languages:</string>
+<!--    TO DO-->
+
+
+
 </resources>

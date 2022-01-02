@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.LoginFragment">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/login_background"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/login_background"
-        android:scaleType="centerCrop"/>
-
-    <ImageView
-        android:id="@+id/icon_email_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:importantForAccessibility="no"
-        app:srcCompat="@drawable/ic_email_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/emailAddress"
-        app:layout_constraintBottom_toBottomOf="@id/emailAddress"
-        android:layout_marginStart="16dp"/>
+        app:srcCompat="@drawable/login_background" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailAddress"
@@ -32,6 +25,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/email_address_hint"
         android:layout_marginTop="300dp"
+        app:startIconDrawable="@drawable/ic_email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,19 +33,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/icon_password_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:importantForAccessibility="no"
-        app:srcCompat="@drawable/ic_password_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/password_toggle"
-        app:layout_constraintBottom_toBottomOf="@id/password_toggle"
-        android:layout_marginStart="16dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_toggle"
@@ -59,25 +44,35 @@
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
         android:hint="@string/password_hint"
+        app:endIconMode="password_toggle"
+        app:startIconDrawable="@drawable/ic_lock"
         app:layout_constraintStart_toStartOf="@id/emailAddress"
         app:layout_constraintTop_toBottomOf="@id/emailAddress">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             />
-
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/login"
+        android:enabled="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="64dp"
+        android:text="@string/sign_in_or_create_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/next_button"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
- />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_toggle"
+        app:layout_constraintVertical_bias="0.2" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
