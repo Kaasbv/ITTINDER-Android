@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
+import retrofit2.http.Header
 
 private const val BASE_URL = "http://10.0.2.2:8080"
 
@@ -22,8 +23,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ChatApiService {
     @GET("/user/chats")
-    // TODO verify that this works
-    suspend fun listChats(): List<Chat>
+    suspend fun listChats(@Header("Cookie") session_id: String): List<Chat>
 }
 
 object ChatApi {

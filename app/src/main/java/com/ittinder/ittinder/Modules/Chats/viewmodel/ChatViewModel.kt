@@ -12,15 +12,15 @@ import kotlinx.coroutines.launch
 
 class ChatViewModel : ViewModel() {
 
-    private val _result = MutableLiveData<String>()
-    val result: LiveData<String> get() = _result
+    private val _result = MutableLiveData<List<Chat>>()
+    val result: LiveData<List<Chat>> get() = _result
 
     fun listChats() {
         viewModelScope.launch {
             val chats: List<Chat> = ChatRepository.listChats()
-            val text = chats.joinToString("\n") { it.toString() }
-            Log.i("aaaaa", "FUCK $text");
-            _result.value = text
+//            val text = chats.joinToString("\n") { it.toString() }
+//            Log.i("aaaaa", "FUCK $text");
+            _result.value = chats
         }
     }
 }
