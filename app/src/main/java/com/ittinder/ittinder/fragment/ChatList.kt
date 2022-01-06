@@ -1,4 +1,4 @@
-package com.ittinder.ittinder.Modules.Chats
+package com.ittinder.ittinder.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,9 +10,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ittinder.ittinder.Modules.Chats.adapter.ChatsAdapter
-import com.ittinder.ittinder.Modules.Chats.util.CoilImageLoader
-import com.ittinder.ittinder.Modules.Chats.viewmodel.ChatViewModel
+import com.ittinder.ittinder.adapter.ChatsAdapter
+import com.ittinder.ittinder.util.CoilImageLoader
+import com.ittinder.ittinder.viewmodel.ChatViewModel
 import com.ittinder.ittinder.databinding.FragmentChatListBinding
 
 class ChatList : Fragment() {

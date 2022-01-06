@@ -1,4 +1,4 @@
-package com.ittinder.ittinder.Modules.Chats.domain
+package com.ittinder.ittinder.domain
 
 import androidx.room.Entity
 //import androidx.room.PrimaryKey

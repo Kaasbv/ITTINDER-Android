@@ -1,4 +1,4 @@
-package com.ittinder.ittinder.Modules.Chats.adapter
+package com.ittinder.ittinder.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.ittinder.ittinder.Modules.Chats.domain.Chat
+import com.ittinder.ittinder.domain.Chat
 import com.ittinder.ittinder.R
-import com.ittinder.ittinder.Modules.Chats.util.ImageLoader
+import com.ittinder.ittinder.util.ImageLoader
 
 private val FEMALE_SYMBOL by lazy {
     HtmlCompat.fromHtml("&#9793;", HtmlCompat.FROM_HTML_MODE_LEGACY)

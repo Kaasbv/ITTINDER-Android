@@ -1,4 +1,4 @@
-package com.ittinder.ittinder.Modules.Chats.util
+package com.ittinder.ittinder.util
 
 import android.widget.ImageView
 

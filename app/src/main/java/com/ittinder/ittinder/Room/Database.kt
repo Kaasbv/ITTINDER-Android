@@ -4,7 +4,7 @@
 //import androidx.room.Database
 //import androidx.room.Room
 //import androidx.room.RoomDatabase
-//import com.ittinder.ittinder.Modules.Chats.domain.TodoItem
+//import com.ittinder.ittinder.domain.TodoItem
 //
 //// https://developer.android.com/codelabs/kotlin-android-training-room-database#5
 //

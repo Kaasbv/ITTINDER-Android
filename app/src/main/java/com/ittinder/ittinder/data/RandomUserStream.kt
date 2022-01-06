@@ -1,4 +1,4 @@
-package com.ittinder.ittinder.domain
+package com.ittinder.ittinder.data
 
 import android.media.Image
 

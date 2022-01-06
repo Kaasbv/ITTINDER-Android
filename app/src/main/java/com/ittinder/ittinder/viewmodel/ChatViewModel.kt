@@ -1,4 +1,4 @@
-package com.ittinder.ittinder.Modules.Chats.viewmodel
+package com.ittinder.ittinder.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,9 +1,7 @@
-package com.ittinder.ittinder.Modules.Chats.util
+package com.ittinder.ittinder.util
 
 import android.widget.ImageView
 import coil.load
-import com.ittinder.ittinder.R
-import com.ittinder.ittinder.Modules.Chats.util.ImageLoader
 
 class CoilImageLoader : ImageLoader {
     override fun loadImage(imageUrl: String, imageView: ImageView) {
