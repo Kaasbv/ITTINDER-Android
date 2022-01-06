@@ -1,13 +1,11 @@
 package com.ittinder.ittinder.Modules.Chats.viewmodel
 
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ittinder.ittinder.Modules.Chats.domain.Chat
-import com.ittinder.ittinder.Modules.Chats.repository.ChatRepository
+import com.ittinder.ittinder.domain.Chat
+import com.ittinder.ittinder.repository.ChatRepository
 import kotlinx.coroutines.launch
 
 class ChatViewModel : ViewModel() {
