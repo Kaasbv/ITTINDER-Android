@@ -5,14 +5,10 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
 @Entity
-data class User(
+data class Chat(
     @PrimaryKey(autoGenerate = false)
-    @Json(name = "id")
-    val id: Int,
-
-    @Json(name = "firstName")
-    val firstName: String,
-
-    @Json(name = "image")
-    val image: List<String>,
+    val id: Long,
+    val initiatedUser: User,
+    val affectedUser: User,
+    val lastMessage: Message
 )

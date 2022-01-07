@@ -6,6 +6,5 @@ import com.squareup.moshi.Json
 
 @Entity
 data class Message(
-    @Json(name = "message")
     val message: String
 )
