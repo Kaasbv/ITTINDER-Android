@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.ittinder.ittinder.domain.Chat
+import com.ittinder.ittinder.data.Chat
 import com.ittinder.ittinder.R
 import com.ittinder.ittinder.util.ImageLoader
 
@@ -26,9 +26,9 @@ class ChatsAdapter(
 ) : RecyclerView.Adapter<ChatsAdapter.ChatViewHolder>() {
     private val chatsData = mutableListOf<Chat>()
 
-    fun setData(catsData: List<Chat>) {
+    fun setData(chatsData: List<Chat>) {
         this.chatsData.clear()
-        this.chatsData.addAll(catsData)
+        this.chatsData.addAll(chatsData)
         notifyDataSetChanged()
     }
 

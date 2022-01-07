@@ -41,19 +41,19 @@ class ChatList : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         // connect adapter to recyclerview:
-        val catsAdapter = ChatsAdapter(layoutInflater, CoilImageLoader()) {
+        val chatsAdapter = ChatsAdapter(layoutInflater, CoilImageLoader()) {
             val action =
                 ChatListDirections.actionChatListToChat(it.id, it.initiatedUser.firstName, "lol")
             this.findNavController().navigate(action)
         }
 
-        recyclerView.adapter = catsAdapter
+        recyclerView.adapter = chatsAdapter
 
         // requestie
         val viewModel: ChatViewModel by viewModels();
         viewModel.listChats()
         viewModel.result.observe(this) {
-            catsAdapter.setData(viewModel.result.value!!)
+            chatsAdapter.setData(viewModel.result.value!!)
         }
 //
 //        binding.button.setOnClickListener {

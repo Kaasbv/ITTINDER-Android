@@ -1,6 +1,6 @@
 package com.ittinder.ittinder.repository
 
-import com.ittinder.ittinder.domain.Chat
+import com.ittinder.ittinder.data.Chat
 import com.ittinder.ittinder.Modules.Chats.service.ChatApi
 
 object ChatRepository {

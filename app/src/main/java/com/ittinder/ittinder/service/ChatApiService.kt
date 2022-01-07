@@ -1,6 +1,6 @@
 package com.ittinder.ittinder.Modules.Chats.service
 
-import com.ittinder.ittinder.domain.Chat
+import com.ittinder.ittinder.data.Chat
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
