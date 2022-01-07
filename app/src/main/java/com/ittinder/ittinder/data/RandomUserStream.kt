@@ -1,4 +1,4 @@
-package com.ittinder.ittinder
+package com.ittinder.ittinder.data
 
 import android.media.Image
 

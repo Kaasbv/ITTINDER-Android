@@ -3,40 +3,17 @@ package com.ittinder.ittinder
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
-import com.ittinder.ittinder.databinding.SwipeScreenBinding
+import com.ittinder.ittinder.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
-    private lateinit var binding: SwipeScreenBinding
-
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            binding = SwipeScreenBinding.inflate(layoutInflater)
-            val view = binding.root
-            setContentView(view)
-
-            val userStreamModel: RandomUserStreamViewModel by viewModels()
-            val swipingModel: SwipingViewModel by viewModels()
-            userStreamModel.RandomUserStreamResponse.observe(this) {
-                binding.result.text = userStreamModel.RandomUserStreamResponse.value
-            }
-            binding.get.setOnClickListener {
-                userStreamModel.getUserStream()
-            }
-            binding.like.setOnClickListener{
-                val SwipeRight = Swiping(9, 1)
-                swipingModel.postSwipeRight(SwipeRight)
-            }
-            binding.dislike.setOnClickListener{
-                val SwipeLeft = Swiping(9,1)
-                swipingModel.postSwipeLeft(SwipeLeft)
-            }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,5 +27,5 @@ class MainActivity : AppCompatActivity() {
             R.id.Chat -> Toast.makeText(this, "Opening chat", Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
-
     }
+}

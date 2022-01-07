@@ -1,4 +1,4 @@
-package com.ittinder.ittinder
+package com.ittinder.ittinder.viewmodel
 
 import android.view.View
 import androidx.lifecycle.LiveData
@@ -9,6 +9,7 @@ import com.ittinder.ittinder.Modules.RandomUserApi
 import com.ittinder.ittinder.Modules.RandomUserStreamApiService
 import com.ittinder.ittinder.Modules.SwipeLeftApi
 import com.ittinder.ittinder.Modules.SwipeRightApi
+import com.ittinder.ittinder.data.Swiping
 import kotlinx.coroutines.launch
 
 private const val TAG = "SwipingViewModel"
