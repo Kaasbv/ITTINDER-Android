@@ -63,6 +63,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/radioGroup"/>
 
-    <!--Recyclerview-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/_grid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:padding="6dp"
+        android:clipToPadding="false"
+        app:listData="@{ImageviewModel.photos}"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/programming_language_question"
+        app:spanCount="2"
+        tools:itemCount="13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
