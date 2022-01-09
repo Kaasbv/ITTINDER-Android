@@ -1,12 +1,18 @@
 package com.ittinder.ittinder.Modules
+import android.app.Service
+import com.ittinder.ittinder.data.Chat
+import com.ittinder.ittinder.data.RandomUserStream
+import com.ittinder.ittinder.data.User
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
 
 private const val BASE_URL =
-    "http://10.0.2.2:8080/"
+    "http://10.0.2.2:8080"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -14,14 +20,15 @@ private val moshi = Moshi.Builder()
 
 
 private val retrofit = Retrofit.Builder()
-    //.addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addConverterFactory(ScalarsConverterFactory.create())
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    //.addConverterFactory(ScalarsConverterFactory.create())
     .baseUrl(BASE_URL)
     .build()
 
+
 interface RandomUserStreamApiService {
-    @GET("user/stream")
-    suspend fun getUsers(): String
+    @GET("/user/stream")
+    suspend fun getUsers(@Header("Cookie") session_id: String): RandomUserStream
 }
 
 object RandomUserApi {

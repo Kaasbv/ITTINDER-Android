@@ -11,6 +11,7 @@ import com.ittinder.ittinder.data.Swiping
 import com.ittinder.ittinder.viewmodel.SwipingViewModel
 import com.ittinder.ittinder.databinding.FragmentSwipeScreenBinding
 
+
 class SwipeScreen : Fragment() {
     private var _binding: FragmentSwipeScreenBinding? = null
     private val binding get() = _binding!!
@@ -24,7 +25,7 @@ class SwipeScreen : Fragment() {
         val userStreamModel: RandomUserStreamViewModel by viewModels()
         val swipingModel: SwipingViewModel by viewModels()
         userStreamModel.RandomUserStreamResponse.observe(this) {
-            binding.result.text = userStreamModel.RandomUserStreamResponse.value
+            //binding.result.text = userStreamModel.RandomUserStreamResponse.value.toString()
         }
         binding.get.setOnClickListener {
             userStreamModel.getUserStream()

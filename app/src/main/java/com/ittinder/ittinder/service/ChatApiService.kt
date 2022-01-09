@@ -9,7 +9,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
 import retrofit2.http.Header
 
-private const val BASE_URL = "http://10.0.2.2:8080"
+private const val BASE_URL = "http://10.0.2.2:8080/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -22,7 +22,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface ChatApiService {
-    @GET("/user/chats")
+    @GET("user/chats")
     suspend fun listChats(@Header("Cookie") session_id: String): List<Chat>
 }
 
