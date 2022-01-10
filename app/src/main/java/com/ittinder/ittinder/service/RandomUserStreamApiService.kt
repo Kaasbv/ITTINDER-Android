@@ -1,6 +1,7 @@
 package com.ittinder.ittinder.Modules
 import android.app.Service
 import com.ittinder.ittinder.data.Chat
+import com.ittinder.ittinder.data.Image
 import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.data.User
 import com.squareup.moshi.Moshi
@@ -28,7 +29,7 @@ private val retrofit = Retrofit.Builder()
 
 interface RandomUserStreamApiService {
     @GET("/user/stream")
-    suspend fun getUsers(@Header("Cookie") session_id: String): RandomUserStream
+    suspend fun getUsers(@Header("Cookie") session_id: String): List<RandomUserStream>
 }
 
 object RandomUserApi {

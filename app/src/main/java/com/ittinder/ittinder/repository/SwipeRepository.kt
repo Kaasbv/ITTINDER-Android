@@ -8,7 +8,7 @@ object SwipeRepository {
     private fun api() = RandomUserApi.retrofitService
 
 
-    suspend fun RandomUser(): RandomUserStream {
-        return api().getUsers("sFg6DFyKnyRuXLFj1UooXlVo5lBBdh1v")
+    suspend fun RandomUser(): List<RandomUserStream> {
+        return api().getUsers("session_id=emD697PekcqMhwfiUelKdSJcwELcz4Li")
     }
 }

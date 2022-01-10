@@ -1,36 +1,21 @@
 package com.ittinder.ittinder.data
 
-import com.squareup.moshi.Json
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
 data class RandomUserStream(
-
-	@Json(name="RandomUserStream")
-	val randomUserStream: List<RandomUserStreamItem?>? = null
-)
-
-data class RandomUserStreamItem(
-
-	@Json(name="firstName")
-	val firstName: String? = null,
-
-	@Json(name="gender")
-	val gender: String? = null,
-
-	@Json(name="surname")
-	val surname: String? = null,
-
-	@Json(name="description")
-	val description: String? = null,
-
-	@Json(name="dateOfBirth")
-	val dateOfBirth: String? = null,
-
-	@Json(name="id")
-	val id: Int? = null,
-
-	@Json(name="interestedInGender")
-	val interestedInGender: String? = null,
-
-	@Json(name="email")
-	val email: String? = null
+    @PrimaryKey(autoGenerate = false)
+    val id: Int,
+    val firstName: String,
+    val surname: String,
+    val dateOfBirth: String,
+    val email: String,
+    val password: String,
+    val gender: String,
+    val interestedInGender: String,
+    val description: String,
+    val latitude: Double,
+    val longitude: Double,
+    val image: List<Image>
 )
