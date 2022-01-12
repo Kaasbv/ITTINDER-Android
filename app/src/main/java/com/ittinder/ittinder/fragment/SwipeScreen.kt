@@ -30,6 +30,7 @@ import com.ittinder.ittinder.util.ImageLoader
 import com.ittinder.ittinder.viewmodel.UserViewModel
 import java.time.Year
 import java.util.*
+import kotlin.concurrent.thread
 import kotlin.random.Random
 
 private const val BASE_URL = "http://10.0.2.2:8080"
@@ -86,6 +87,7 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
 
         binding.like.setOnClickListener{
             swipingModel.postSwipeRight(user1, user2)
+            Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenLike())
 
 
@@ -93,6 +95,7 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
 
         binding.dislike.setOnClickListener{
             swipingModel.postSwipeLeft(user1, user2)
+            Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenDislike())
         }
 
