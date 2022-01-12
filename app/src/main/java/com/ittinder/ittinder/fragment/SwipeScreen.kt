@@ -1,8 +1,10 @@
 package com.ittinder.ittinder.fragment
 
+import android.content.ContentValues.TAG
 import android.icu.text.DateFormat.DAY
 import android.icu.text.DateTimePatternGenerator.DAY
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.map
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBindings
 import com.ittinder.ittinder.MainActivity
@@ -19,10 +22,12 @@ import com.ittinder.ittinder.data.Chat
 import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.viewmodel.RandomUserStreamViewModel
 import com.ittinder.ittinder.data.Swiping
+import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.viewmodel.SwipingViewModel
 import com.ittinder.ittinder.databinding.FragmentSwipeScreenBinding
 import com.ittinder.ittinder.util.CoilImageLoader
 import com.ittinder.ittinder.util.ImageLoader
+import com.ittinder.ittinder.viewmodel.UserViewModel
 import java.time.Year
 import java.util.*
 import kotlin.random.Random
@@ -30,10 +35,10 @@ import kotlin.random.Random
 private const val BASE_URL = "http://10.0.2.2:8080"
 
 class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
-    private val chatsData = mutableListOf<Chat>()
     private var _binding: FragmentSwipeScreenBinding? = null
     private val binding get() = _binding!!
     private val userData = mutableListOf<RandomUserStream>()
+    private val ownUserData = mutableListOf<User>()
     private val imageLoader: ImageLoader = CoilImageLoader()
 
 
@@ -56,62 +61,75 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
         this.userData.clear()
         this.userData.add(userStream)
     }
-    fun bindData(randomUserStream: RandomUserStream) {
+
+    fun setDataUser(user: User){
+        this.ownUserData.clear()
+        this.ownUserData.add(user)
+    }
+
+
+    fun bindData(randomUserStream: RandomUserStream, user: User) {
+        val swipingModel: SwipingViewModel by viewModels()
+        val user1 = user.id
+        val user2 = randomUserStream.id
         binding.Name.text = randomUserStream.firstName
+        binding.Name.textSize = 40F
+        binding.comma.text = ","
         binding.age.text = calculateAge(randomUserStream.dateOfBirth).toString()
         binding.description.text = randomUserStream.description
         if (randomUserStream.image.isEmpty()) {
             imageLoader.loadImage("https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/people/m/ey-matthew-harold-meta.jpg", binding.imageView)
-
         }
         else {
             imageLoader.loadImage(BASE_URL + randomUserStream.image[0].photosImagePath, binding.imageView)
+        }
+
+        binding.like.setOnClickListener{
+            swipingModel.postSwipeRight(user1, user2)
+            findNavController().navigate(SwipeScreenDirections.actionSwipeScreenLike())
+
+
+        }
+
+        binding.dislike.setOnClickListener{
+            swipingModel.postSwipeLeft(user1, user2)
+            findNavController().navigate(SwipeScreenDirections.actionSwipeScreenDislike())
         }
 
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+        savedInstanceState: Bundle?): View {
         _binding = FragmentSwipeScreenBinding.inflate(inflater, container, false)
 
         val userStreamModel: RandomUserStreamViewModel by viewModels()
-        val swipingModel: SwipingViewModel by viewModels()
+        val userModel : UserViewModel by viewModels()
+
+        userStreamModel.getUserStream()
+        if (userStreamModel.RandomUserStreamResponse.value.isNullOrEmpty()) {
+            binding.Name.text = "No available users to swipe"
+            binding.Name.textSize = 25F
+            binding.comma.text = ""
+            binding.description.text = ""
+
+        }
         userStreamModel.RandomUserStreamResponse.observe(this) {
-            val json = userStreamModel.RandomUserStreamResponse.value?.elementAt(0)
-            if (json != null) {
-                setData(json)
-                bindData(userData[0])
+            userModel.getUser()
+            userModel.status.observe(this) {
+                val returnValue = userModel.status.value
+                if (returnValue != null) {
+                    setDataUser(returnValue)
+                }
+                val json = userStreamModel.RandomUserStreamResponse.value?.elementAt(0)
+                if (json != null) {
+                    setData(json)
+                    bindData(userData[0], ownUserData[0])
+                }
             }
         }
-        binding.get.setOnClickListener {
-            userStreamModel.getUserStream()
-        }
-        binding.like.setOnClickListener{
-            val swipeRight = Swiping(9, 1)
-            swipingModel.postSwipeRight(swipeRight)
-            userStreamModel.getUserStream()
-        }
-        binding.dislike.setOnClickListener{
-            val swipeLeft = Swiping(9,1)
-            swipingModel.postSwipeLeft(swipeLeft)
-            userStreamModel.getUserStream()
-        }
-
         return binding.root
     }
-/*
-    override fun onViewCreated (view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //SwipeScreenDirections.actionSwipeScreenToChatList()
-
-
-
-    }
-*/
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -23,20 +23,15 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(this, R.id.nav_host_fragment)
     }
 
+
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
     }
 
-
-
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
 
-
-            //R.id.profileFragment -> Toast.makeText(this, "Opening profile", Toast.LENGTH_SHORT).show()
-            //R.id.chatList -> Toast.makeText(this, "Opening chat", Toast.LENGTH_SHORT).show()
         }
 }

@@ -51,5 +51,14 @@
         android:id="@+id/swipeScreen"
         android:name="com.ittinder.ittinder.fragment.SwipeScreen"
         android:label="SwipeScreen"
-        tools:layout="@layout/fragment_swipe_screen" />
+        tools:layout="@layout/fragment_swipe_screen" >
+        <action
+            android:id="@+id/action_swipeScreen_like"
+            app:destination="@id/swipeScreen"
+            app:enterAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_swipeScreen_dislike"
+            app:destination="@id/swipeScreen"
+            app:enterAnim="@anim/slide_left" />
+    </fragment>
 </navigation>

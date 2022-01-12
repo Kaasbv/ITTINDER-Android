@@ -58,3 +58,4 @@ object SwipeRightApi {
         retrofit.create(SwipeRightApiService::class.java)
     }
 }
+
