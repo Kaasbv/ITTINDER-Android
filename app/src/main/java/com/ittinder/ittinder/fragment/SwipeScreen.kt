@@ -29,7 +29,7 @@ import kotlin.random.Random
 
 private const val BASE_URL = "http://10.0.2.2:8080"
 
-class SwipeScreen : Fragment() {
+class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
     private val chatsData = mutableListOf<Chat>()
     private var _binding: FragmentSwipeScreenBinding? = null
     private val binding get() = _binding!!
@@ -101,7 +101,15 @@ class SwipeScreen : Fragment() {
 
         return binding.root
     }
+/*
+    override fun onViewCreated (view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //SwipeScreenDirections.actionSwipeScreenToChatList()
 
+
+
+    }
+*/
 
 
 
