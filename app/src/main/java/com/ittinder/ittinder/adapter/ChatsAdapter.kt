@@ -55,7 +55,7 @@ class ChatsAdapter(
         fun bindData(chat: Chat) {
             imageLoader.loadImage("https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/people/m/ey-matthew-harold-meta.jpg", chatPhotoView)
             chatNameView.text = chat.initiatedUser.firstName
-            chatLastMessage.text = chat.lastMessage.message.toString()
+            chatLastMessage.text = chat.lastMessage!!.message.toString()
         }
     }
 }

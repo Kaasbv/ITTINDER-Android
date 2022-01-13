@@ -27,49 +27,43 @@ class MessageViewModel : ViewModel() {
 
     private fun api() = ChatApi.retrofitService
 
-    fun sync(context: Context, activity: Activity) {
+    fun sync(context: Context, activity: Activity, chatId: Long) {
         //First get last sync date
-        val pref = activity?.getPreferences(Context.MODE_PRIVATE)
-        var lastSyncIso = pref.getString("messages_last_sync_iso", null)
-
-        if(lastSyncIso == null) lastSyncIso = "1900-01-01T00:00:00"
         val currentIso: String = Instant.now().toString()
-
-        Log.i("FUCK", currentIso)
-        Log.i("FUCK", lastSyncIso)
 
         viewModelScope.launch {
             val messages: List<Message> = api().listMessagesPolling("session_id=pY586JSDnWfqZtwdAEmPlr1MAv6JLwhn", 1)
-            Log.i("MESSAGES", messages.toString())
 
             if(messages.isNotEmpty()){
                 MessageRepository.insertMessages(context, messages)
-                count = MessageRepository.getMessagesCount(context, 18)
+                count = MessageRepository.getMessagesCount(context, chatId)
                 _lastChanged.value = currentIso
-            }
-
-            with (pref.edit()) {
-                putString("messages_last_sync_iso", currentIso)
-                apply()
             }
         }
     }
 
-    fun getMessageByPositionAndUserId(context: Context, position: Int, userId: Int): MutableLiveData<MessageEntity>
+    fun getMessageByPositionAndUserId(context: Context, position: Int, chatId: Long): MutableLiveData<MessageEntity>
     {
         val responseLiveData = MutableLiveData<MessageEntity>()
         viewModelScope.launch {
-            responseLiveData.value = MessageRepository.getMessageEntityByIndex(context, position, userId)
+            responseLiveData.value = MessageRepository.getMessageEntityByIndex(context, position, chatId)
         }
         return responseLiveData
     }
 
-    fun getMessagesCountByUserId(context: Context, userId: Int): MutableLiveData<Int>
+    fun getMessagesCountByUserId(context: Context, chatId: Long): MutableLiveData<Int>
     {
         val responseLiveData = MutableLiveData<Int>()
         viewModelScope.launch {
-            responseLiveData.value = MessageRepository.getMessagesCount(context, userId)
+            responseLiveData.value = MessageRepository.getMessagesCount(context, chatId)
         }
         return responseLiveData
+    }
+
+    fun postMessage(chatId: Long, message: String)
+    {
+        viewModelScope.launch {
+            api().postMessage("session_id=pY586JSDnWfqZtwdAEmPlr1MAv6JLwhn", chatId, message)
+        }
     }
 }

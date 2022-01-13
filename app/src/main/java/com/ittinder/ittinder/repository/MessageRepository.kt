@@ -19,23 +19,24 @@ object MessageRepository {
             messageEntities.add(MessageEntity(
                 it.id,
                 it.message,
-                it.user.firstName,
+                it.user!!.firstName,
                 it.createdDate,
-                it.user.id
+                it.user!!.id,
+                it.chat!!.id
             ))
         }
 
         dao(context).insertMessages(messageEntities.toList())
     }
 
-    suspend fun getMessageEntityByIndex(context: Context, index: Int, userId: Int): MessageEntity
+    suspend fun getMessageEntityByIndex(context: Context, index: Int, chatId: Long): MessageEntity
     {
-        val messages: List<MessageEntity> = dao(context).getMessageByIndex(index, userId)
+        val messages: List<MessageEntity> = dao(context).getMessageByIndex(index, chatId)
         return messages[0]
     }
 
-    suspend fun getMessagesCount(context: Context, userId: Int): Int
+    suspend fun getMessagesCount(context: Context, chatId: Long): Int
     {
-        return dao(context).getMessagesCount(userId)
+        return dao(context).getMessagesCount(chatId)
     }
 }

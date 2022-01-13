@@ -31,13 +31,11 @@ interface ChatApiService {
     @GET("/user/chats")
     suspend fun listChats(@Header("Cookie") session_id: String): List<Chat>
 
-    @GET("/user/messages")
-    suspend fun listMessages(@Header("Cookie") session_id: String, @Query("startDate") startDate: String, @Query("endDate") endDate: String): List<Message>
-
     @GET("/user/messages/polling")
     suspend fun listMessagesPolling(@Header("Cookie") session_id: String, @Query("secondsRange") secondsRange: Int): List<Message>
 
-    @GET("/user/messages")
+    @POST("/chat/{chatId}/messages")
+    suspend fun postMessage(@Header("Cookie") session_id: String, @Path("chatId") chatId: Long, @Body message: String)
 }
 
 object ChatApi {

@@ -18,14 +18,12 @@ class MessagesAdapter(
     private var length: Int = 0
 
     fun refresh(newLength: Int = length) {
-        Log.i("LENCHANGE", "Someone says length is " + length.toString())
         length = newLength
         notifyDataSetChanged()
     }
 
     fun putData(position: Int, message: MessageEntity){
         cachedData[position] = message
-        Log.i("LEN", cachedData.size.toString())
     }
 
     fun resetData(){
@@ -38,17 +36,15 @@ class MessagesAdapter(
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        Log.i("RECYC", "asking for " + position.toString())
         var message: MessageEntity? = cachedData[position];
         if(message == null){
             getData(this, position)
-            cachedData[position] = MessageEntity(1, "Loading...", "Loading...", "", 1)
+            cachedData[position] = MessageEntity(1, "Loading...", "Loading...", "", 1, 1)
         }
         holder.bindData(cachedData[position]!!)
     }
 
      override fun getItemCount(): Int {
-         Log.i("RECYC", "asking for length" + length.toString())
          return length
      }
 

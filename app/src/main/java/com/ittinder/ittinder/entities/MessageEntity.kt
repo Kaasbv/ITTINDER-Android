@@ -10,5 +10,6 @@ data class MessageEntity(
     val message: String,
     val name: String,
     val createdDate: String,
-    val userId: Long
+    val userId: Long,
+    val chatId: Long
 )

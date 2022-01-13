@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ittinder.ittinder.entities.MessageEntity
 
-@Database(entities = [MessageEntity::class], version = 2, exportSchema = false)
+@Database(entities = [MessageEntity::class], version = 4, exportSchema = false)
 abstract class MainDatabase : RoomDatabase() {
 
     /**
