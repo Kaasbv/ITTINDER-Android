@@ -7,13 +7,13 @@ import java.time.LocalDate
 @Entity
 data class User(
     @PrimaryKey(autoGenerate = false)
-    val id: Int,
+    val id: Long,
     val firstName: String,
     val surname: String,
-    val dateOfBirth: LocalDate,
+    val dateOfBirth: String,
     val email: String,
-    val gender: String,
-    val description: String,
-    val InterestedInGender: String
+//    val gender: String,
+//    val description: String,
+//    val InterestedInGender: String
 ) {
 }

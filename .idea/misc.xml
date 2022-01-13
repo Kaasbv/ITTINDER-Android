@@ -9,7 +9,7 @@
         <entry key="..\:/Users/steef/Desktop/ItTinder/ITTINDER-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2171875" />
         <entry key="..\:/Users/steef/Desktop/ItTinder/ITTINDER-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2171875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_chat_list.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_preferences.xml" value="0.1" />
@@ -17,7 +17,8 @@
         <entry key="app/src/main/res/layout/fragment_swipe_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_swipe_screen2.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/item_cat.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_chat.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_chat.xml" value="0.21170562879968385" />
+        <entry key="app/src/main/res/layout/item_message.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/swipe_screen.xml" value="0.12907608695652173" />
       </map>
     </option>
