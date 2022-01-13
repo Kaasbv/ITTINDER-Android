@@ -1,5 +1,4 @@
 package com.ittinder.ittinder.data
-
 import android.media.Image
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -13,4 +12,5 @@ data class Image(
     val image: String,
     val photosImagePath: String,
     val sortNr: Int
+
 )

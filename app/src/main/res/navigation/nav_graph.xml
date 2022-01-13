@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/swipeScreen">
 
+
     <fragment
         android:id="@+id/chatList"
         android:name="com.ittinder.ittinder.fragment.ChatList"
