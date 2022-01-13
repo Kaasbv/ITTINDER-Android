@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/profileFragment">
+    app:startDestination="@id/swipeScreen">
+
 
     <fragment
         android:id="@+id/chatList"
@@ -37,7 +38,7 @@
         android:id="@+id/mainActivity"
         android:name="com.ittinder.ittinder.MainActivity"
         android:label="fragment_swipe_screen"
-        tools:layout="@layout/fragment_swipe_screen" />
+        tools:layout="@layout/fragment_chat_list" />
     <fragment
         android:id="@+id/preferenceFragment"
         android:name="com.ittinder.ittinder.fragment.PreferenceFragment"
@@ -50,5 +51,15 @@
     <fragment
         android:id="@+id/swipeScreen"
         android:name="com.ittinder.ittinder.fragment.SwipeScreen"
-        android:label="SwipeScreen" />
+        android:label="SwipeScreen"
+        tools:layout="@layout/fragment_swipe_screen" >
+        <action
+            android:id="@+id/action_swipeScreen_like"
+            app:destination="@id/swipeScreen"
+            app:enterAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_swipeScreen_dislike"
+            app:destination="@id/swipeScreen"
+            app:enterAnim="@anim/slide_left" />
+    </fragment>
 </navigation>
