@@ -27,19 +27,8 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 
-interface RandomUserStreamApiService {
-    @GET("/user/stream")
-    suspend fun getUsers(@Header("Cookie") session_id: String): List<RandomUserStream>
-}
-
-object RandomUserApi {
-    val retrofitService: RandomUserStreamApiService by lazy {
-        retrofit.create(RandomUserStreamApiService::class.java)
-    }
-}
-
 interface SwipeLeftApiService {
-    @POST("SwipeLeft")
+    @POST("/SwipeLeft")
     suspend fun postItem(@Query("idUser1") idUser1: Int, @Query("idUser2") idUser2: Int)
 }
 object SwipeLeftApi {
@@ -49,7 +38,7 @@ object SwipeLeftApi {
 }
 
 interface  SwipeRightApiService {
-    @POST ("SwipeRight")
+    @POST ("/SwipeRight")
     suspend fun postItem(@Query("idUser1") idUser1: Int, @Query("idUser2") idUser2: Int)
 }
 

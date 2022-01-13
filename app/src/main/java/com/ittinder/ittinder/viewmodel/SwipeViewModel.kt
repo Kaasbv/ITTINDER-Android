@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ittinder.ittinder.Modules.RandomUserApi
-import com.ittinder.ittinder.Modules.RandomUserStreamApiService
 import com.ittinder.ittinder.Modules.SwipeLeftApi
 import com.ittinder.ittinder.Modules.SwipeRightApi
 import com.ittinder.ittinder.data.Swiping

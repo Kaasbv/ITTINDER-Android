@@ -1,5 +1,6 @@
 package com.ittinder.ittinder.service
 
+import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.data.User
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -39,5 +40,16 @@ interface UserApiService {
 object UserApi {
     val retrofitService: UserApiService by lazy {
         retrofit.create(UserApiService::class.java)
+    }
+}
+
+interface RandomUserStreamApiService {
+    @GET("/user/stream")
+    suspend fun getUsers(@Header("Cookie") session_id: String): List<RandomUserStream>
+}
+
+object RandomUserApi {
+    val retrofitService: RandomUserStreamApiService by lazy {
+        retrofit.create(RandomUserStreamApiService::class.java)
     }
 }

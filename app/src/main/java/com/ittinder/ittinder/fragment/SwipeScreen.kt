@@ -19,7 +19,6 @@ import androidx.viewbinding.ViewBindings
 import com.ittinder.ittinder.MainActivity
 import com.ittinder.ittinder.R
 import com.ittinder.ittinder.data.RandomUserStream
-import com.ittinder.ittinder.viewmodel.RandomUserStreamViewModel
 import com.ittinder.ittinder.data.Swiping
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.viewmodel.SwipingViewModel
@@ -40,8 +39,6 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
     private val userData = mutableListOf<RandomUserStream>()
     private val ownUserData = mutableListOf<User>()
     private val imageLoader: ImageLoader = CoilImageLoader()
-
-
 
     fun calculateAge(dateOfBirth : String): Int {
         val year = Calendar.getInstance().get(Calendar.YEAR)
@@ -67,7 +64,6 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
         this.ownUserData.add(user)
     }
 
-
     fun bindData(randomUserStream: RandomUserStream, user: User) {
         val swipingModel: SwipingViewModel by viewModels()
         val user1 = user.id
@@ -88,8 +84,6 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
             swipingModel.postSwipeRight(user1, user2)
             Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenLike())
-
-
         }
 
         binding.dislike.setOnClickListener{
@@ -97,7 +91,6 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
             Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenDislike())
         }
-
     }
 
     override fun onCreateView(
@@ -105,13 +98,11 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
         savedInstanceState: Bundle?): View {
         _binding = FragmentSwipeScreenBinding.inflate(inflater, container, false)
 
-        val userStreamModel: RandomUserStreamViewModel by viewModels()
         val userModel : UserViewModel by viewModels()
 
-
-        userStreamModel.getUserStream()
-        userStreamModel.RandomUserStreamResponse.observe(this) {
-            if (userStreamModel.RandomUserStreamResponse.value.isNullOrEmpty()) {
+        userModel.getUserStream()
+        userModel.RandomUserStreamResponse.observe(this) {
+            if (userModel.RandomUserStreamResponse.value.isNullOrEmpty()) {
                 binding.Name.text = "No available users to swipe"
                 binding.Name.textSize = 25F
                 binding.comma.text = ""
@@ -124,7 +115,7 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
                 if (returnValue != null) {
                     setDataUser(returnValue)
                 }
-                val json = userStreamModel.RandomUserStreamResponse.value?.elementAt(0)
+                val json = userModel.RandomUserStreamResponse.value?.elementAt(0)
                 if (json != null) {
                     setData(json)
                     bindData(userData[0], ownUserData[0])
