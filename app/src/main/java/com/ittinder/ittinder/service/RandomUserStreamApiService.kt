@@ -27,24 +27,16 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 
-interface SwipeLeftApiService {
+interface SwipingApiService {
     @POST("/SwipeLeft")
-    suspend fun postItem(@Query("idUser1") idUser1: Int, @Query("idUser2") idUser2: Int)
-}
-object SwipeLeftApi {
-    val retrofitService: SwipeLeftApiService by lazy {
-        retrofit.create(SwipeLeftApiService::class.java)
-    }
-}
+    suspend fun swipeLeft(@Query("idUser1") idUser1: Int, @Query("idUser2") idUser2: Int)
 
-interface  SwipeRightApiService {
     @POST ("/SwipeRight")
-    suspend fun postItem(@Query("idUser1") idUser1: Int, @Query("idUser2") idUser2: Int)
+    suspend fun swipeRight(@Query("idUser1") idUser1: Int, @Query("idUser2") idUser2: Int)
 }
-
-object SwipeRightApi {
-    val retrofitService: SwipeRightApiService by lazy {
-        retrofit.create(SwipeRightApiService::class.java)
+object SwipingApi {
+    val retrofitService: SwipingApiService by lazy {
+        retrofit.create(SwipingApiService::class.java)
     }
 }
 
