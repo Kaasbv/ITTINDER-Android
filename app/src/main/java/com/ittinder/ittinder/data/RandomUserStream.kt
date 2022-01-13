@@ -1,19 +1,21 @@
 package com.ittinder.ittinder.data
 
-import android.media.Image
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-
+@Entity
 data class RandomUserStream(
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val firstName: String,
     val surname: String,
-    val dateOfBirth: Int,
+    val dateOfBirth: String,
     val email: String,
     val password: String,
     val gender: String,
     val interestedInGender: String,
     val description: String,
-    val image: Image,
     val latitude: Double,
     val longitude: Double,
+    val image: List<Image>
 )
