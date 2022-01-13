@@ -102,23 +102,25 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
 
         userModel.getUserStream()
         userModel.RandomUserStreamResponse.observe(this) {
-            if (userModel.RandomUserStreamResponse.value.isNullOrEmpty()) {
+            if (userModel.RandomUserStreamResponse.value.isNullOrEmpty() ) {
                 binding.Name.text = "No available users to swipe"
                 binding.Name.textSize = 25F
                 binding.comma.text = ""
                 binding.description.text = ""
 
             }
-            userModel.getUser()
-            userModel.status.observe(this) {
-                val returnValue = userModel.status.value
-                if (returnValue != null) {
-                    setDataUser(returnValue)
-                }
-                val json = userModel.RandomUserStreamResponse.value?.elementAt(0)
-                if (json != null) {
-                    setData(json)
-                    bindData(userData[0], ownUserData[0])
+            else {
+                userModel.getUser()
+                userModel.status.observe(this) {
+                    val returnValue = userModel.status.value
+                    if (returnValue != null) {
+                        setDataUser(returnValue)
+                    }
+                    val json = userModel.RandomUserStreamResponse.value?.elementAt(0)
+                    if (json != null) {
+                        setData(json)
+                        bindData(userData[0], ownUserData[0])
+                    }
                 }
             }
         }

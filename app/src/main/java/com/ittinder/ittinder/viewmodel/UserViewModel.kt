@@ -30,8 +30,6 @@ class UserViewModel : ViewModel() {
         getUserStream()
     }
 
-    private fun api() = RandomUserApi.retrofitService
-
     fun getUser() {
         viewModelScope.launch {
             try {
@@ -47,10 +45,8 @@ class UserViewModel : ViewModel() {
 
     fun getUserStream() {
         viewModelScope.launch {
-            val RandomUsers: List<RandomUserStream> = api().getUsers("session_id=emD697PekcqMhwfiUelKdSJcwELcz4Li")
+            val RandomUsers: List<RandomUserStream> = RandomUserApi.retrofitService.getUsers("session_id=emD697PekcqMhwfiUelKdSJcwELcz4Li")
             _RandomUserStreamResponse.value = RandomUsers
-            Log.e(TAG, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-            Log.e(TAG, RandomUsers.toString())
 
         }
 
