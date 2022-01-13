@@ -12,6 +12,7 @@ data class User(
     val surname: String,
     val dateOfBirth: LocalDate,
     val email: String,
+    val password: String,
     val gender: String,
     val description: String,
     val InterestedInGender: String

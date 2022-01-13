@@ -32,4 +32,13 @@ class UserViewModel : ViewModel() {
             }
         }
     }
+
+    fun login(email: String, password: String) {
+        if (email != user.value?.email && password != user.value?.password) {
+
+        }
+
+    }
+
+
 }
