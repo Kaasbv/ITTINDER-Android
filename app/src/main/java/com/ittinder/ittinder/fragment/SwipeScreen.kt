@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBindings
 import com.ittinder.ittinder.MainActivity
 import com.ittinder.ittinder.R
-import com.ittinder.ittinder.data.Chat
 import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.viewmodel.RandomUserStreamViewModel
 import com.ittinder.ittinder.data.Swiping
@@ -109,15 +108,16 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
         val userStreamModel: RandomUserStreamViewModel by viewModels()
         val userModel : UserViewModel by viewModels()
 
-        userStreamModel.getUserStream()
-        if (userStreamModel.RandomUserStreamResponse.value.isNullOrEmpty()) {
-            binding.Name.text = "No available users to swipe"
-            binding.Name.textSize = 25F
-            binding.comma.text = ""
-            binding.description.text = ""
 
-        }
+        userStreamModel.getUserStream()
         userStreamModel.RandomUserStreamResponse.observe(this) {
+            if (userStreamModel.RandomUserStreamResponse.value.isNullOrEmpty()) {
+                binding.Name.text = "No available users to swipe"
+                binding.Name.textSize = 25F
+                binding.comma.text = ""
+                binding.description.text = ""
+
+            }
             userModel.getUser()
             userModel.status.observe(this) {
                 val returnValue = userModel.status.value
