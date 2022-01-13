@@ -9,6 +9,6 @@ object ChatRepository {
 //    private fun dao(context: Context) = TodoistDatabase.getInstance(context).todoItemDao()
 
     suspend fun listChats(): List<Chat> {
-        return api().listChats("session_id=dRNNE2xpfMbh4BxfJm37RhBumEXnfSU4")
+        return api().listChats("session_id=VFkT4CRrYVcLvfloNlYFvB8M9tTclhxw")
     }
 }

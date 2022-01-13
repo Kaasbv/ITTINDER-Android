@@ -2,6 +2,7 @@ package com.ittinder.ittinder.fragment
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,15 +20,18 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+    //set LiveData listeners
     private val emailLiveData = MutableLiveData<String>()
     private val passwordLiveData = MutableLiveData<String>()
     private val isValidLiveData = MediatorLiveData<Boolean>().apply {
         this.value = false
 
+        //listen to email
         addSource(emailLiveData) { email ->
             val password = passwordLiveData.value
             this.value = validateForm(email, password)
         }
+        //listen to password
         addSource(passwordLiveData) { password ->
             val email = emailLiveData.value
             this.value = validateForm(email, password)
@@ -77,6 +81,7 @@ class LoginFragment : Fragment() {
 
     }
 
+    //Form validator
     private fun validateForm(email: String?, password: String?): Boolean {
         val isValidEmail = email != null && email.isNotBlank() && email.contains("@")
         val isValidPassword = password != null && password.isNotBlank() && password.length >= 6

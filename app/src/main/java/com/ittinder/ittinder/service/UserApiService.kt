@@ -29,12 +29,15 @@ interface UserApiService {
     suspend fun createUser(): User
 
     @GET("/user")
-    //TODO test this function!!!
     suspend fun getUser(@Header("Cookie") session_id: String): User
 
     @PUT("/user/update")
     //TODO test this function!!!
     suspend fun updateUser(): User
+
+    @POST("/user/login")
+    //TODO test this function!!!
+    suspend fun loginUser(): User
 }
 
 object UserApi {

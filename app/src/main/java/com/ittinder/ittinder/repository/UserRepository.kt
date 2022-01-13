@@ -10,6 +10,6 @@ object UserRepository {
     private fun api() = UserApi.retrofitService
 
     suspend fun getUser(): User {
-        return api().getUser("session_id=UyPzVnyD6k5cCmjVZndXghPc6rGE5t9K")
+        return api().getUser("session_id=VFkT4CRrYVcLvfloNlYFvB8M9tTclhxw")
     }
 }
