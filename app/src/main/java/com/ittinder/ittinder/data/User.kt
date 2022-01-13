@@ -10,11 +10,11 @@ data class User(
     val id: Int,
     val firstName: String,
     val surname: String,
-    val dateOfBirth: LocalDate,
+    val dateOfBirth: String,
     val email: String,
     val password: String,
     val gender: String,
     val description: String,
-    val InterestedInGender: String
+    val interestedInGender: String
 ) {
 }
