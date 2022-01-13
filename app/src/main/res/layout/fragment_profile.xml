@@ -126,6 +126,29 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputDescription"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Description"
+        app:counterEnabled="true"
+        app:counterMaxLength="255"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputDoB">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="255"
+            tools:text="Ik ben Jan en heb erg veel zin om te daten. Ik hou van lange wandelingen in een MMO RPG. Daarnaast vis ik graag online naar informatie en sleutel ik regelmatig aan mijn desktop." />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:id="@+id/account_details"
         android:layout_width="wrap_content"
@@ -136,7 +159,7 @@
         android:gravity="center_horizontal"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputDoB" />
+        app:layout_constraintTop_toBottomOf="@id/textInputDescription" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
