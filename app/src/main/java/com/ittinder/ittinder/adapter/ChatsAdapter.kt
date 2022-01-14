@@ -5,19 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.ittinder.ittinder.data.Chat
 import com.ittinder.ittinder.R
 import com.ittinder.ittinder.util.ImageLoader
 
-private val FEMALE_SYMBOL by lazy {
-    HtmlCompat.fromHtml("&#9793;", HtmlCompat.FROM_HTML_MODE_LEGACY)
-}
-private val MALE_SYMBOL by lazy {
-    HtmlCompat.fromHtml("&#9794;", HtmlCompat.FROM_HTML_MODE_LEGACY)
-}
-private const val UNKNOWN_SYMBOL = "?"
+
+
 
 class ChatsAdapter(
     private val layoutInflater: LayoutInflater,
@@ -29,6 +23,7 @@ class ChatsAdapter(
     fun setData(chatsData: List<Chat>) {
         this.chatsData.clear()
         this.chatsData.addAll(chatsData)
+
         notifyDataSetChanged()
     }
 
@@ -60,7 +55,7 @@ class ChatsAdapter(
         fun bindData(chat: Chat) {
             imageLoader.loadImage("https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/people/m/ey-matthew-harold-meta.jpg", chatPhotoView)
             chatNameView.text = chat.initiatedUser.firstName
-            chatLastMessage.text = chat.lastMessage.message.toString()
+            chatLastMessage.text = chat.lastMessage!!.message.toString()
         }
     }
 }

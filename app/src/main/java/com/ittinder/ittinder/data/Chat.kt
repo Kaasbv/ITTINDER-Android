@@ -9,5 +9,5 @@ data class Chat(
     val id: Long,
     val initiatedUser: User,
     val affectedUser: User,
-    val lastMessage: Message
+    val lastMessage: Message?
 )
