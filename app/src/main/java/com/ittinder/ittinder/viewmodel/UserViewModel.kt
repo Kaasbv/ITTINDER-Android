@@ -1,10 +1,13 @@
 package com.ittinder.ittinder.viewmodel
 
+import android.app.Activity
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ittinder.ittinder.data.LoginObject
 import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.repository.UserRepository
@@ -28,8 +31,8 @@ class UserViewModel : ViewModel() {
     val user: LiveData<User> = _user
 
     init {
-        getUser()
-        getUserStream()
+//        getUser()
+//        getUserStream()
     }
 
     fun getUser() {
@@ -47,15 +50,27 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    fun login(email: String, password: String): Boolean {
-        if (email != user.value?.email && password != user.value?.password) {
-            return false
-        } else {
-            viewModelScope.launch {
-                UserApi.retrofitService.loginUser()
+    fun login(email: String, password: String, activity: Activity): MutableLiveData<Boolean> {
+        val response = MutableLiveData<Boolean>()
+
+        val pref = activity?.getPreferences(Context.MODE_PRIVATE)
+
+        viewModelScope.launch {
+            try{
+                val apiResponse = UserApi.retrofitService.loginUser(LoginObject(email, password))
+                with (pref.edit()) {
+                    putString("session_id", apiResponse.sessionId)
+                    putString("user_id", apiResponse.user.id.toString())
+                    apply()
+                }
+
+                response.value = true
+            }catch(e: Exception){
+                response.value = false
             }
         }
-        return true
+
+        return response
     }
 
     fun getUserStream() {

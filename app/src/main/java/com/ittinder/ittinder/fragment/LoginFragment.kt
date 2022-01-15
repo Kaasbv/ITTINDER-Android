@@ -12,6 +12,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
+import com.ittinder.ittinder.R
 import com.ittinder.ittinder.databinding.FragmentLoginBinding
 import com.ittinder.ittinder.viewmodel.UserViewModel
 
@@ -38,6 +40,11 @@ class LoginFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(false)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,6 +53,7 @@ class LoginFragment : Fragment() {
 
 //        val viewModel: UserViewModel by viewModels();
 //        viewModel.user
+//        activity.findViewById(R.menu.menu)
         return binding.root
     }
 
@@ -69,14 +77,25 @@ class LoginFragment : Fragment() {
             loginButton.isEnabled = isValid
         }
 
-        loginButton.setOnClickListener {
-            //TODO: login submitten
-            Toast.makeText(context, "You clicked me.", Toast.LENGTH_SHORT).show()
+        val viewModel: UserViewModel by viewModels();
 
-           userViewModel.login(
+        loginButton.setOnClickListener {
+            viewModel.login(
                 emailEditText?.text.toString(),
-                passwordEditText?.text.toString()
-            )
+                passwordEditText?.text.toString(),
+                activity!!
+            ).observe(this.viewLifecycleOwner) { successful ->
+                if (successful) {
+                    findNavController().navigate(R.id.action_loginFragment_to_swipeScreen)
+                    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Invalid credentials", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        binding.register.setOnClickListener {
+            findNavController().navigate()
         }
 
     }

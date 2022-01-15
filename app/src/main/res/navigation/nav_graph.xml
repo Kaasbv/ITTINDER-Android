@@ -33,7 +33,11 @@
         android:id="@+id/loginFragment"
         android:name="com.ittinder.ittinder.fragment.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_swipeScreen"
+            app:destination="@id/swipeScreen" />
+    </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.ittinder.ittinder.MainActivity"

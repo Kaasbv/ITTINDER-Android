@@ -32,5 +32,7 @@
     <string name="other">Other</string>
     <string name="doesnt_matter">Doesn\'t matter</string>
     <string name="programming_languages">Your programming languages:</string>
+    <string name="register">Register</string>
+    <string name="sign_in">Sign in</string>
     <!--    TO DO-->
 </resources>
