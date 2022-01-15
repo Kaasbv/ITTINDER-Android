@@ -6,5 +6,9 @@ import com.squareup.moshi.Json
 
 @Entity
 data class Message(
-    val message: String
+    val id: Long,
+    val createdDate: String,
+    val message: String,
+    val user: User?,
+    val chat: Chat?
 )

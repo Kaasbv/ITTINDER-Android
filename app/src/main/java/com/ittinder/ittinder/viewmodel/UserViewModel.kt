@@ -35,6 +35,7 @@ class UserViewModel : ViewModel() {
 //        getUserStream()
     }
 
+
     fun getUser() {
         viewModelScope.launch {
             try {
@@ -42,10 +43,19 @@ class UserViewModel : ViewModel() {
 //                _status.value = "Success: $_user retrieved"
                 val userResult = UserRepository.getUser()
                 _status.value = userResult
-                //_status.value = "Success: ${userResult} retrieved"
             } catch (e: Exception) {
-                Log.e(TAG, "Jemoeder")
-                //_status.value = "Failure: ${e.message}"
+                Log.e(TAG, "Failed to retrieve user from getUser")
+            }
+        }
+    }
+
+    fun updateUser(user: User) {
+        viewModelScope.launch {
+            try {
+                UserRepository.updateUser(user)
+            }
+            catch (e: Exception){
+                Log.e(TAG, "Can't update user from updateUser")
             }
         }
     }
@@ -75,8 +85,12 @@ class UserViewModel : ViewModel() {
 
     fun getUserStream() {
         viewModelScope.launch {
-            val RandomUsers: List<RandomUserStream> = RandomUserApi.retrofitService.getUsers("session_id=VFkT4CRrYVcLvfloNlYFvB8M9tTclhxw")
-            _RandomUserStreamResponse.value = RandomUsers
+            try {
+                val RandomUsers: List<RandomUserStream> = RandomUserApi.retrofitService.getUsers("session_id=LMX9a5XDZz8ZPt8nvCJe1nyqZDPgDSFl")
+                _RandomUserStreamResponse.value = RandomUsers
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to retrieve users from getUserStream")
+            }
 
         }
 

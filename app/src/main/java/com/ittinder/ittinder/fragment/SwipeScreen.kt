@@ -81,13 +81,13 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
         }
 
         binding.like.setOnClickListener{
-            swipingModel.postSwipeRight(user1, user2)
+            swipingModel.postSwipeRight(user1.toInt(), user2)
             Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenLike())
         }
 
         binding.dislike.setOnClickListener{
-            swipingModel.postSwipeLeft(user1, user2)
+            swipingModel.postSwipeLeft(user1.toInt(), user2)
             Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenDislike())
         }

@@ -4,6 +4,7 @@ import com.ittinder.ittinder.data.LoginObject
 import com.ittinder.ittinder.data.LoginResponse
 import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.data.User
+import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -31,8 +32,7 @@ interface UserApiService {
     suspend fun getUser(@Header("Cookie") session_id: String): User
 
     @PUT("/user/update")
-    //TODO test this function!!!
-    suspend fun updateUser(): User
+    suspend fun updateUser(@Header("Cookie") session_id: String, @Body user: User): String
 
     @POST("/user/login")
     suspend fun loginUser(@Body loginObject: LoginObject): LoginResponse
