@@ -1,45 +1,39 @@
 package com.ittinder.ittinder.fragment
 
 import android.content.ContentValues.TAG
-import android.icu.text.DateFormat.DAY
-import android.icu.text.DateTimePatternGenerator.DAY
 import android.os.Bundle
+import android.service.autofill.UserData
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBindings
-import com.ittinder.ittinder.MainActivity
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
 import com.ittinder.ittinder.R
 import com.ittinder.ittinder.data.RandomUserStream
-import com.ittinder.ittinder.data.Swiping
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.viewmodel.SwipingViewModel
 import com.ittinder.ittinder.databinding.FragmentSwipeScreenBinding
 import com.ittinder.ittinder.util.CoilImageLoader
+import com.ittinder.ittinder.util.GPSUtils
 import com.ittinder.ittinder.util.ImageLoader
 import com.ittinder.ittinder.viewmodel.UserViewModel
-import java.time.Year
 import java.util.*
-import kotlin.concurrent.thread
-import kotlin.random.Random
 
 private const val BASE_URL = "http://10.0.2.2:8080"
 
-class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
+class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
     private var _binding: FragmentSwipeScreenBinding? = null
     private val binding get() = _binding!!
     private val userData = mutableListOf<RandomUserStream>()
     private val ownUserData = mutableListOf<User>()
     private val imageLoader: ImageLoader = CoilImageLoader()
 
+    //Small function to calculate age bases on current date and date of birth
     fun calculateAge(dateOfBirth : String): Int {
         val year = Calendar.getInstance().get(Calendar.YEAR)
         val month = Calendar.getInstance().get(Calendar.MONTH)
@@ -66,8 +60,29 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
 
     fun bindData(randomUserStream: RandomUserStream, user: User) {
         val swipingModel: SwipingViewModel by viewModels()
+        val userModel : UserViewModel by viewModels()
         val user1 = user.id
         val user2 = randomUserStream.id
+
+        //usage of gps sensors to add location to user and update it to the DB
+
+        val oldLat = user.latitude
+        val oldLong = user.longitude
+        activity?.let { it1 -> GPSUtils.findDeviceLocation(it1) }
+        val longitude = GPSUtils.longitude
+        val latitude = GPSUtils.latitude
+
+        if (oldLong != longitude && oldLat != latitude) {
+            if (longitude != null) {
+                user.longitude = longitude
+            }
+            if (latitude != null) {
+                user.latitude = latitude
+            }
+            setDataUser(user)
+            userModel.updateUser(ownUserData[0])
+        }
+
         binding.Name.text = randomUserStream.firstName
         binding.Name.textSize = 40F
         binding.comma.text = ","
@@ -107,7 +122,6 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
                 binding.Name.textSize = 25F
                 binding.comma.text = ""
                 binding.description.text = ""
-
             }
             else {
                 userModel.getUser()

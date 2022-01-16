@@ -1,5 +1,6 @@
 package com.ittinder.ittinder.viewmodel
 
+import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -56,7 +57,7 @@ class UserViewModel : ViewModel() {
     fun getUserStream() {
         viewModelScope.launch {
             try {
-                val RandomUsers: List<RandomUserStream> = RandomUserApi.retrofitService.getUsers("session_id=LMX9a5XDZz8ZPt8nvCJe1nyqZDPgDSFl")
+                val RandomUsers: List<RandomUserStream> = RandomUserApi.retrofitService.getUsers("session_id=dA373YL49e3AFMfRElzA4A20SfG6DjYe")
                 _RandomUserStreamResponse.value = RandomUsers
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to retrieve users from getUserStream")

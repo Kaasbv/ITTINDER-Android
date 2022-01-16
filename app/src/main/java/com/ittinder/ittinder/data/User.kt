@@ -16,5 +16,7 @@ data class User(
     var gender: String?,
     var description: String?,
     var interestedInGender: String?,
-    var password: String
+    var password: String,
+    var latitude: Double,
+    var longitude : Double
 )
