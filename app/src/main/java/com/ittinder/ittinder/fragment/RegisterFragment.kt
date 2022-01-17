@@ -30,7 +30,6 @@ class RegisterFragment : Fragment() {
         val viewModel : UserViewModel by viewModels()
 
         binding.registerSubmit.setOnClickListener {
-            Log.i("JEM", "Jeeeemoeeeeder")
             val user = RegisterObject(
                 binding.EditTextFirstName.text.toString(),
                 binding.EditTextMiddleName.text.toString(),

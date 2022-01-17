@@ -14,7 +14,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
-import com.ittinder.ittinder.R
 import com.ittinder.ittinder.databinding.FragmentLoginBinding
 import com.ittinder.ittinder.viewmodel.UserViewModel
 
@@ -46,10 +45,6 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-
-//        val viewModel: UserViewModel by viewModels();
-//        viewModel.user
-//        activity.findViewById(R.menu.menu)
         return binding.root
     }
 
@@ -89,7 +84,7 @@ class LoginFragment : Fragment() {
                 activity!!
             ).observe(this.viewLifecycleOwner) { successful ->
                 if (successful) {
-                    findNavController().navigate(R.id.action_loginFragment_to_swipeScreen)
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSwipeScreen())
                     Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, "Invalid credentials", Toast.LENGTH_SHORT).show()
@@ -98,7 +93,7 @@ class LoginFragment : Fragment() {
         }
 
         binding.register.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
     }
 

@@ -56,10 +56,6 @@ class ChatsAdapter(
         val chatPhotoView: ImageView = containerView.findViewById(R.id.item_chat_photo)
 
         fun bindData(chat: Chat) {
-            Log.i("KAAS", userId.toString())
-            Log.i("KAAS", chat.initiatedUser.id.toString())
-            Log.i("KAAS", chat.affectedUser.id.toString())
-
             val user: User = if (chat.initiatedUser.id != userId) chat.initiatedUser else chat.affectedUser
 
             var image: String = if(user.image != null){
