@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.set
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -92,6 +93,7 @@ class Chat : Fragment() {
 
         binding.chatSubmitButton.setOnClickListener {
             viewModel.postMessage(chatId, binding.chatEdittext.text.toString(), activity!!)
+            binding.chatEdittext.text.clear()
         }
 
         return binding.root
