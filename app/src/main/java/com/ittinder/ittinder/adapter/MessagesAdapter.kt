@@ -1,13 +1,11 @@
 package com.ittinder.ittinder.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ittinder.ittinder.R
-import com.ittinder.ittinder.data.Message
 import com.ittinder.ittinder.entities.MessageEntity
 
 class MessagesAdapter(

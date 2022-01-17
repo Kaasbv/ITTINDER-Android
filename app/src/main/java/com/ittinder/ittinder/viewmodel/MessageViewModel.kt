@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ittinder.ittinder.Modules.Chats.service.ChatApi
+import com.ittinder.ittinder.service.ChatApi
 import com.ittinder.ittinder.data.Message
 import com.ittinder.ittinder.entities.MessageEntity
 import com.ittinder.ittinder.repository.MessageRepository

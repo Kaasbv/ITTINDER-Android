@@ -1,28 +1,20 @@
 package com.ittinder.ittinder.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.set
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ittinder.ittinder.adapter.ChatsAdapter
 import com.ittinder.ittinder.adapter.MessagesAdapter
 import com.ittinder.ittinder.databinding.FragmentChatBinding
-import com.ittinder.ittinder.entities.MessageEntity
-import com.ittinder.ittinder.repository.MessageRepository
 import com.ittinder.ittinder.util.CoilImageLoader
 import com.ittinder.ittinder.util.ImageLoader
-import com.ittinder.ittinder.viewmodel.ChatViewModel
 import com.ittinder.ittinder.viewmodel.MessageViewModel
 
 class Chat : Fragment() {

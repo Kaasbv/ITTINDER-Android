@@ -1,21 +1,13 @@
 package com.ittinder.ittinder.fragment
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.service.autofill.UserData
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.motion.widget.Debug.getLocation
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.ittinder.ittinder.R
-import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.viewmodel.SwipingViewModel
 import com.ittinder.ittinder.databinding.FragmentSwipeScreenBinding
@@ -30,7 +22,7 @@ private const val BASE_URL = "http://10.0.2.2:8080"
 class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
     private var _binding: FragmentSwipeScreenBinding? = null
     private val binding get() = _binding!!
-    private val userData = mutableListOf<RandomUserStream>()
+    private val userData = mutableListOf<User>()
     private val ownUserData = mutableListOf<User>()
     private val imageLoader: ImageLoader = CoilImageLoader()
 
@@ -70,9 +62,9 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
         }
     }
 
-    private fun setData(userStream: RandomUserStream){
+    private fun setData(user: User){
         this.userData.clear()
-        this.userData.add(userStream)
+        this.userData.add(user)
     }
 
     private fun setDataUser(user: User){
@@ -80,31 +72,31 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
         this.ownUserData.add(user)
     }
 
-    private fun bindData(randomUserStream: RandomUserStream, user: User) {
+    private fun bindData(otherUser: User, user: User) {
         val swipingModel: SwipingViewModel by viewModels()
         val user1 = user.id
-        val user2 = randomUserStream.id
+        val user2 = otherUser.id
 
-        binding.Name.text = randomUserStream.firstName
+        binding.Name.text = otherUser.firstName
         binding.Name.textSize = 40F
         binding.comma.text = ","
-        binding.age.text = calculateAge(randomUserStream.dateOfBirth).toString()
-        binding.description.text = randomUserStream.description
-        if (randomUserStream.image == null) {
+        binding.age.text = calculateAge(otherUser.dateOfBirth).toString()
+        binding.description.text = otherUser.description
+        if (otherUser.image == null) {
             imageLoader.loadImage("https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/people/m/ey-matthew-harold-meta.jpg", binding.imageView)
         }
         else {
-            imageLoader.loadImage(BASE_URL + randomUserStream.image, binding.imageView)
+            imageLoader.loadImage(BASE_URL + otherUser.image, binding.imageView)
         }
 
         binding.like.setOnClickListener{
-            swipingModel.postSwipeRight(user1!!.toInt(), user2)
+            swipingModel.postSwipeRight(user1, user2)
             Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenLike())
         }
 
         binding.dislike.setOnClickListener{
-            swipingModel.postSwipeLeft(user1!!.toInt(), user2)
+            swipingModel.postSwipeLeft(user1, user2)
             Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenDislike())
         }
@@ -118,8 +110,8 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
         val userModel : UserViewModel by viewModels()
 
         userModel.getUserStream(activity!!)
-        userModel.RandomUserStreamResponse.observe(this) {
-            if (userModel.RandomUserStreamResponse.value.isNullOrEmpty() ) {
+        userModel.randomUserStreamResponse.observe(this) {
+            if (userModel.randomUserStreamResponse.value.isNullOrEmpty() ) {
                 binding.Name.text = "No available users to swipe"
                 binding.Name.textSize = 25F
                 binding.comma.text = ""
@@ -133,7 +125,7 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
                         setDataUser(returnValue)
                         getLocation(returnValue)
                     }
-                    val json = userModel.RandomUserStreamResponse.value?.elementAt(0)
+                    val json = userModel.randomUserStreamResponse.value?.elementAt(0)
                     if (json != null) {
                         setData(json)
                         bindData(userData[0], ownUserData[0])

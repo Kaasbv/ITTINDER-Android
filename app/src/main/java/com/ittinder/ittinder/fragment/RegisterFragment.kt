@@ -1,7 +1,6 @@
 package com.ittinder.ittinder.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ittinder.ittinder.R
 import com.ittinder.ittinder.data.RegisterObject
-import com.ittinder.ittinder.data.User
-import com.ittinder.ittinder.databinding.FragmentLoginBinding
 import com.ittinder.ittinder.databinding.FragmentRegisterBinding
 import com.ittinder.ittinder.viewmodel.UserViewModel
 

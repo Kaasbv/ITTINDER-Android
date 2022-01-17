@@ -16,7 +16,6 @@ import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.databinding.FragmentProfileBinding
 import com.ittinder.ittinder.util.CoilImageLoader
@@ -109,7 +108,7 @@ class ProfileFragment : Fragment() {
             // Continue only if the File was successfully created
             photoFile?.also {
                 val photoURI: Uri = FileProvider.getUriForFile(
-                    context!!,
+                    requireContext(),
                     "com.ittinder.ittinder.fileprovider",
                     it
                 )
@@ -124,7 +123,7 @@ class ProfileFragment : Fragment() {
     private fun createImageFile(): File {
         // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File? = context!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
             "JPEG_${timeStamp}_", /* prefix */
             ".jpg", /* suffix */
@@ -138,7 +137,6 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
-            Log.i("FUCK", "AAAAAAAAAAAA")
             // put data in inputstream
             val selectedImageUri = Uri.fromFile(File(currentPhotoPath))
             val ims: InputStream? =
