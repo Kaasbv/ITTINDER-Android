@@ -7,10 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ittinder.ittinder.data.LoginObject
-import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.data.RegisterObject
 import com.ittinder.ittinder.data.User
-import com.ittinder.ittinder.service.RandomUserApi
 import com.ittinder.ittinder.service.UserApi
 
 import kotlinx.coroutines.launch
@@ -23,9 +21,9 @@ import java.lang.Exception
 private const val TAG = "UserViewModel"
 
 class UserViewModel : BaseViewModel() {
-    private val _RandomUserStreamResponse: MutableLiveData<List<RandomUserStream>> = MutableLiveData()
-    val RandomUserStreamResponse: LiveData<List<RandomUserStream>>
-        get() = _RandomUserStreamResponse
+    private val _randomUserStreamResponse: MutableLiveData<List<User>> = MutableLiveData()
+    val randomUserStreamResponse: LiveData<List<User>>
+        get() = _randomUserStreamResponse
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
@@ -61,7 +59,7 @@ class UserViewModel : BaseViewModel() {
 
         viewModelScope.launch {
             try{
-                val apiResponse = UserApi.retrofitService.loginUser(LoginObject(email, password))
+                val apiResponse = api().loginUser(LoginObject(email, password))
                 with (pref.edit()) {
                     putString("session_id", apiResponse.sessionId)
                     putLong("user_id", apiResponse.user.id)
@@ -80,8 +78,8 @@ class UserViewModel : BaseViewModel() {
     fun getUserStream(activity: Activity) {
         viewModelScope.launch {
             try {
-                val RandomUsers: List<RandomUserStream> = RandomUserApi.retrofitService.getUsers("session_id=" + getSessionId(activity))
-                _RandomUserStreamResponse.value = RandomUsers
+                val randomUsers: List<User> = api().getUsers("session_id=" + getSessionId(activity))
+                _randomUserStreamResponse.value = randomUsers
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to retrieve users from getUserStream")
                 throw e
@@ -114,7 +112,7 @@ class UserViewModel : BaseViewModel() {
                     inputStream.readBytes()
                 )
             )
-            val addImage = api().uploadImage("session_id=" + getSessionId(activity), part)
+            api().uploadImage("session_id=" + getSessionId(activity), part)
         }
     }
 }

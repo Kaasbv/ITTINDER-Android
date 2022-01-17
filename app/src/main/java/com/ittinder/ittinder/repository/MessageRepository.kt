@@ -1,12 +1,9 @@
 package com.ittinder.ittinder.repository
 
 import android.content.Context
-import com.ittinder.ittinder.data.Chat
-import com.ittinder.ittinder.Modules.Chats.service.ChatApi
 import com.ittinder.ittinder.Room.MainDatabase
 import com.ittinder.ittinder.data.Message
 import com.ittinder.ittinder.entities.MessageEntity
-import androidx.lifecycle.viewModelScope
 
 object MessageRepository {
     private fun dao(context: Context) = MainDatabase.getInstance(context).messageDao()

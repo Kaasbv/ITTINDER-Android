@@ -1,15 +1,8 @@
-package com.ittinder.ittinder.Modules
-import android.app.Service
-import com.ittinder.ittinder.data.Chat
-import com.ittinder.ittinder.data.Image
-import com.ittinder.ittinder.data.RandomUserStream
-import com.ittinder.ittinder.data.User
+package com.ittinder.ittinder.service
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
 
 private const val BASE_URL =
@@ -29,10 +22,10 @@ private val retrofit = Retrofit.Builder()
 
 interface SwipingApiService {
     @POST("/SwipeLeft")
-    suspend fun swipeLeft(@Query("idUser1") idUser1: Int, @Query("idUser2") idUser2: Int)
+    suspend fun swipeLeft(@Query("idUser1") idUser1: Long, @Query("idUser2") idUser2: Long)
 
     @POST ("/SwipeRight")
-    suspend fun swipeRight(@Query("idUser1") idUser1: Int, @Query("idUser2") idUser2: Int)
+    suspend fun swipeRight(@Query("idUser1") idUser1: Long, @Query("idUser2") idUser2: Long)
 }
 object SwipingApi {
     val retrofitService: SwipingApiService by lazy {

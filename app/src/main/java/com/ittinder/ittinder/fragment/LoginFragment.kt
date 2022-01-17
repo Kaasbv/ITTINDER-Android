@@ -3,7 +3,6 @@ package com.ittinder.ittinder.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import com.ittinder.ittinder.databinding.FragmentLoginBinding
 import com.ittinder.ittinder.viewmodel.UserViewModel
 
 class LoginFragment : Fragment() {
-    private lateinit var userViewModel: UserViewModel
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 

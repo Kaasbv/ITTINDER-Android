@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,14 +14,9 @@ import com.ittinder.ittinder.adapter.ChatsAdapter
 import com.ittinder.ittinder.util.CoilImageLoader
 import com.ittinder.ittinder.viewmodel.ChatViewModel
 import com.ittinder.ittinder.databinding.FragmentChatListBinding
-import com.ittinder.ittinder.viewmodel.BaseViewModel
 
 class ChatList : Fragment() {
-
     private var _binding: FragmentChatListBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -44,10 +38,9 @@ class ChatList : Fragment() {
                 ChatListDirections.actionChatListToChat(it.id, if (it.initiatedUser.id != userId) it.initiatedUser.firstName else it.affectedUser.firstName, "lol")
             this.findNavController().navigate(action)
         }
-
         recyclerView.adapter = chatsAdapter
 
-        // requestie
+        //List chats
         val viewModel: ChatViewModel by viewModels();
         viewModel.listChats(activity!!)
         viewModel.result.observe(this) {

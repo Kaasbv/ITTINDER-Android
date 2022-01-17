@@ -1,4 +1,4 @@
-package com.ittinder.ittinder.Modules.Chats.service
+package com.ittinder.ittinder.service
 
 import com.ittinder.ittinder.data.Chat
 import com.ittinder.ittinder.data.Message
@@ -9,8 +9,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
 import retrofit2.http.Header
-import com.squareup.moshi.JsonAdapter
-import java.util.*
 
 
 private const val BASE_URL = "http://10.0.2.2:8080"

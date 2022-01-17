@@ -39,21 +39,13 @@ interface UserApiService {
     @Multipart
     @POST("/user/image")
     suspend fun uploadImage(@Header("Cookie") session_id: String, @Part multipartFile: MultipartBody.Part): User
+
+    @GET("/user/stream")
+    suspend fun getUsers(@Header("Cookie") session_id: String): List<User>
 }
 
 object UserApi {
     val retrofitService: UserApiService by lazy {
         retrofit.create(UserApiService::class.java)
-    }
-}
-
-interface RandomUserStreamApiService {
-    @GET("/user/stream")
-    suspend fun getUsers(@Header("Cookie") session_id: String): List<RandomUserStream>
-}
-
-object RandomUserApi {
-    val retrofitService: RandomUserStreamApiService by lazy {
-        retrofit.create(RandomUserStreamApiService::class.java)
     }
 }
