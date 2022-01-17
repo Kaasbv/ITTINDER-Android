@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.Debug.getLocation
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.LocationServices
@@ -48,24 +49,9 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
         return (year - userYear) - 1
     }
 
-    fun setData(userStream: RandomUserStream){
-        this.userData.clear()
-        this.userData.add(userStream)
-    }
-
-    fun setDataUser(user: User){
-        this.ownUserData.clear()
-        this.ownUserData.add(user)
-    }
-
-    fun bindData(randomUserStream: RandomUserStream, user: User) {
-        val swipingModel: SwipingViewModel by viewModels()
-        val userModel : UserViewModel by viewModels()
-        val user1 = user.id
-        val user2 = randomUserStream.id
-
+    fun getLocation(user: User){
         //usage of gps sensors to add location to user and update it to the DB
-
+        val userModel : UserViewModel by viewModels()
         val oldLat = user.latitude
         val oldLong = user.longitude
         activity?.let { it1 -> GPSUtils.findDeviceLocation(it1) }
@@ -82,6 +68,22 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
             setDataUser(user)
             userModel.updateUser(ownUserData[0])
         }
+    }
+
+    private fun setData(userStream: RandomUserStream){
+        this.userData.clear()
+        this.userData.add(userStream)
+    }
+
+    private fun setDataUser(user: User){
+        this.ownUserData.clear()
+        this.ownUserData.add(user)
+    }
+
+    private fun bindData(randomUserStream: RandomUserStream, user: User) {
+        val swipingModel: SwipingViewModel by viewModels()
+        val user1 = user.id
+        val user2 = randomUserStream.id
 
         binding.Name.text = randomUserStream.firstName
         binding.Name.textSize = 40F
@@ -129,6 +131,7 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
                     val returnValue = userModel.status.value
                     if (returnValue != null) {
                         setDataUser(returnValue)
+                        getLocation(returnValue)
                     }
                     val json = userModel.RandomUserStreamResponse.value?.elementAt(0)
                     if (json != null) {
