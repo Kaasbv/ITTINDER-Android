@@ -16,7 +16,7 @@ import java.lang.Exception
 
 private const val TAG = "UserStreamModel"
 
-class UserViewModel : ViewModel() {
+open class UserViewModel : ViewModel() {
     private val _status = MutableLiveData<User>()
     val status: LiveData<User> get () = _status
 
