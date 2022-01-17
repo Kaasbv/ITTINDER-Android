@@ -2,6 +2,7 @@ package com.ittinder.ittinder.fragment
 
 import android.app.Activity
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ittinder.ittinder.data.RandomUserStream
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.databinding.FragmentProfileBinding
@@ -66,6 +68,15 @@ class ProfileFragment : Fragment() {
 
         binding.profileImageButton.setOnClickListener {
             capturePhoto()
+        }
+
+        binding.profileLogout.setOnClickListener {
+            val pref = activity?.getPreferences(Context.MODE_PRIVATE)
+            with (pref!!.edit()) {
+                clear()
+                apply()
+            }
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
         }
 
         return binding.root

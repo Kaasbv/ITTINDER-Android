@@ -54,7 +54,11 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.ittinder.ittinder.fragment.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/swipeScreen"
         android:name="com.ittinder.ittinder.fragment.SwipeScreen"
