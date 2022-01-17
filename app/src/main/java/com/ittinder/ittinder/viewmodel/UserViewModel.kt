@@ -71,7 +71,6 @@ class UserViewModel : BaseViewModel() {
                 response.value = true
             }catch(e: Exception){
                 response.value = false
-                throw e
             }
         }
 
