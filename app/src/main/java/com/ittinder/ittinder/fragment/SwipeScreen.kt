@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.ittinder.ittinder.MainActivity
 import com.ittinder.ittinder.R
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.viewmodel.SwipingViewModel
@@ -106,6 +107,10 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
         _binding = FragmentSwipeScreenBinding.inflate(inflater, container, false)
+
+        //Set menu on swipescreen
+        (activity as MainActivity).showMenu = true
+        requireActivity().invalidateMenu()
 
         val userModel : UserViewModel by viewModels()
 

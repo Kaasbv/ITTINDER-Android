@@ -70,7 +70,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.profileLogout.setOnClickListener {
-            val pref = activity?.getPreferences(Context.MODE_PRIVATE)
+            val pref = requireActivity().getPreferences(Context.MODE_PRIVATE)
             with (pref!!.edit()) {
                 clear()
                 apply()
@@ -144,7 +144,9 @@ class ProfileFragment : Fragment() {
 
             // if clicked on button, these arguments get passed to function addImageToBook
             if (ims != null) {
-                userViewModel.uploadImage(requireActivity(), ims)
+                userViewModel.uploadImage(requireActivity(), ims).observe(this){ user ->
+                    bindData(user)
+                }
             }
         }
     }
