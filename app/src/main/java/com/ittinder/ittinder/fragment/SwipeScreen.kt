@@ -73,21 +73,21 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
         binding.comma.text = ","
         binding.age.text = calculateAge(randomUserStream.dateOfBirth).toString()
         binding.description.text = randomUserStream.description
-        if (randomUserStream.image.isEmpty()) {
+        if (randomUserStream.image == null) {
             imageLoader.loadImage("https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/people/m/ey-matthew-harold-meta.jpg", binding.imageView)
         }
         else {
-            imageLoader.loadImage(BASE_URL + randomUserStream.image[0].photosImagePath, binding.imageView)
+            imageLoader.loadImage(BASE_URL + randomUserStream.image, binding.imageView)
         }
 
         binding.like.setOnClickListener{
-            swipingModel.postSwipeRight(user1.toInt(), user2)
+            swipingModel.postSwipeRight(user1!!.toInt(), user2)
             Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenLike())
         }
 
         binding.dislike.setOnClickListener{
-            swipingModel.postSwipeLeft(user1.toInt(), user2)
+            swipingModel.postSwipeLeft(user1!!.toInt(), user2)
             Thread.sleep(100)
             findNavController().navigate(SwipeScreenDirections.actionSwipeScreenDislike())
         }
@@ -100,7 +100,7 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
 
         val userModel : UserViewModel by viewModels()
 
-        userModel.getUserStream()
+        userModel.getUserStream(activity!!)
         userModel.RandomUserStreamResponse.observe(this) {
             if (userModel.RandomUserStreamResponse.value.isNullOrEmpty() ) {
                 binding.Name.text = "No available users to swipe"
@@ -110,9 +110,9 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen) {
 
             }
             else {
-                userModel.getUser()
-                userModel.status.observe(this) {
-                    val returnValue = userModel.status.value
+                userModel.getUser(activity!!)
+                userModel.user.observe(this) {
+                    val returnValue = userModel.user.value
                     if (returnValue != null) {
                         setDataUser(returnValue)
                     }

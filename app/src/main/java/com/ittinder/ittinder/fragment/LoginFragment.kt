@@ -1,6 +1,7 @@
 package com.ittinder.ittinder.fragment
 
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -40,11 +41,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(false)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,6 +56,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val pref = activity!!.getPreferences(Context.MODE_PRIVATE)
+        val userId: Long = pref.getLong("user_id", 0)
+
+        if(!userId.equals(0)){
+            findNavController().navigate(R.id.action_loginFragment_to_swipeScreen)
+        }
 
         val emailEditText = binding.emailAddress.editText
         val passwordEditText = binding.password.editText
@@ -95,9 +98,8 @@ class LoginFragment : Fragment() {
         }
 
         binding.register.setOnClickListener {
-            findNavController().navigate()
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
-
     }
 
     //Form validator
