@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.set
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -36,8 +37,6 @@ class Chat : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChatBinding.inflate(inflater, container, false)
-
-
         val viewModel: MessageViewModel by viewModels();
         val firstname = navigationArgs.firstname
         val chatId = navigationArgs.chatId
@@ -66,7 +65,9 @@ class Chat : Fragment() {
         val messagesAdapter =  MessagesAdapter(layoutInflater) { adapter, index ->
             viewModel.getMessageByPositionAndUserId(context!!, index, chatId).observe(this) { message ->
                 adapter.putData(index, message)
-                adapter.refresh()
+                recyclerView.post(Runnable {
+                    adapter.refresh()
+                })
             }
         }
         recyclerView.adapter = messagesAdapter
@@ -91,7 +92,8 @@ class Chat : Fragment() {
         }
 
         binding.chatSubmitButton.setOnClickListener {
-            viewModel.postMessage(chatId, binding.chatEdittext.text.toString())
+            viewModel.postMessage(chatId, binding.chatEdittext.text.toString(), activity!!)
+            binding.chatEdittext.text.clear()
         }
 
         return binding.root

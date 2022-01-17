@@ -17,5 +17,5 @@ data class RandomUserStream(
     val description: String,
     val latitude: Double,
     val longitude: Double,
-    val image: List<Image>
+    val image: String?
 )

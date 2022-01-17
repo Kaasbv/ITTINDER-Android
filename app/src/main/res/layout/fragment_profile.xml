@@ -212,7 +212,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/update_profile_button"
         android:enabled="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -227,6 +227,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputPassword"
         app:layout_constraintVertical_bias="0.2" />
+
+
+    <TextView
+        android:id="@+id/imagesHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Your profile image"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/update_profile_button" />
+
+    <ImageView
+        android:id="@+id/profile_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="600px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagesHeader" />
+
+    <Button
+        android:id="@+id/profile_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="30dp"
+        android:text="Update image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_image_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

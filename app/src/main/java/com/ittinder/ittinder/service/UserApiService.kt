@@ -1,10 +1,12 @@
 package com.ittinder.ittinder.service
 
-import com.ittinder.ittinder.data.RandomUserStream
-import com.ittinder.ittinder.data.User
+import com.ittinder.ittinder.data.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.MultipartBody
+import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
@@ -23,16 +25,20 @@ private val retrofit = Retrofit.Builder()
 
 interface UserApiService {
     @POST("/user")
-    //TODO test this function!!!
-    suspend fun createUser(): User
+    suspend fun register(@Body user: RegisterObject): String
 
     @GET("/user")
     suspend fun getUser(@Header("Cookie") session_id: String): User
 
     @PUT("/user/update")
-    //TODO test this function!!!
     suspend fun updateUser(@Header("Cookie") session_id: String, @Body user: User): String
 
+    @POST("/user/login")
+    suspend fun loginUser(@Body loginObject: LoginObject): LoginResponse
+
+    @Multipart
+    @POST("/user/image")
+    suspend fun uploadImage(@Header("Cookie") session_id: String, @Part multipartFile: MultipartBody.Part): User
 }
 
 object UserApi {

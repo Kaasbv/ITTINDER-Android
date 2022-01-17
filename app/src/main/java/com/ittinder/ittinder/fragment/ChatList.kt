@@ -1,5 +1,6 @@
 package com.ittinder.ittinder.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.ittinder.ittinder.adapter.ChatsAdapter
 import com.ittinder.ittinder.util.CoilImageLoader
 import com.ittinder.ittinder.viewmodel.ChatViewModel
 import com.ittinder.ittinder.databinding.FragmentChatListBinding
+import com.ittinder.ittinder.viewmodel.BaseViewModel
 
 class ChatList : Fragment() {
 
@@ -22,13 +24,6 @@ class ChatList : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var navController: NavController
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-//        val navHostFragment = parentFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-//        navController = navHostFragment.navController
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,14 +31,17 @@ class ChatList : Fragment() {
     ): View {
         _binding = FragmentChatListBinding.inflate(inflater, container, false)
 
+        val pref = activity!!.getPreferences(Context.MODE_PRIVATE)
+        val userId: Long = pref.getLong("user_id", 0)
+
         // set recyclerview layout:
         val recyclerView: RecyclerView = binding.chatRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         // connect adapter to recyclerview:
-        val chatsAdapter = ChatsAdapter(layoutInflater, CoilImageLoader()) {
+        val chatsAdapter = ChatsAdapter(layoutInflater, CoilImageLoader(), userId) {
             val action =
-                ChatListDirections.actionChatListToChat(it.id, it.initiatedUser.firstName, "lol")
+                ChatListDirections.actionChatListToChat(it.id, if (it.initiatedUser.id != userId) it.initiatedUser.firstName else it.affectedUser.firstName, "lol")
             this.findNavController().navigate(action)
         }
 
@@ -51,14 +49,10 @@ class ChatList : Fragment() {
 
         // requestie
         val viewModel: ChatViewModel by viewModels();
-        viewModel.listChats()
+        viewModel.listChats(activity!!)
         viewModel.result.observe(this) {
             chatsAdapter.setData(viewModel.result.value!!)
         }
-//
-//        binding.button.setOnClickListener {
-//            navController.navigateUp()
-//        }
 
         return binding.root
     }
