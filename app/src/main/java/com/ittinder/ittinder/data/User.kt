@@ -18,5 +18,4 @@ data class User(
     var description: String?,
     var interestedInGender: String?,
     var password: String?
-) {
-}
+)
