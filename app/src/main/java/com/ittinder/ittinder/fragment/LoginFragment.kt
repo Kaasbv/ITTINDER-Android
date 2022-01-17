@@ -55,8 +55,8 @@ class LoginFragment : Fragment() {
         val pref = activity!!.getPreferences(Context.MODE_PRIVATE)
         val userId: Long = pref.getLong("user_id", 0)
 
-        if(!userId.equals(0)){
-            findNavController().navigate(R.id.action_loginFragment_to_swipeScreen)
+        if(userId != null && userId.toString() != "0"){
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSwipeScreen())
         }
 
         val emailEditText = binding.emailAddress.editText
