@@ -66,7 +66,7 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
                 user.latitude = latitude
             }
             setDataUser(user)
-            userModel.updateUser(ownUserData[0])
+            userModel.updateUser(ownUserData[0], requireActivity())
         }
     }
 
