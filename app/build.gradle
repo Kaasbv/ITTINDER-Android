@@ -70,11 +70,18 @@ dependencies {
     androidTestImplementation "androidx.test:core-ktx:1.4.0"
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestUtil 'androidx.test:orchestrator:1.4.1'
+    testImplementation "io.mockk:mockk:1.12.2"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
+    testImplementation "org.mockito:mockito-core:3.3.3"
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    debugImplementation 'androidx.fragment:fragment-testing:1.4.0'
 
     // to create a Livecycle aware components
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     implementation 'androidx.activity:activity-ktx:1.4.0'
+    testImplementation "com.google.truth:truth:1.1.2"
+
 
     // Retrofit and json-to-string library for Kotlin
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
