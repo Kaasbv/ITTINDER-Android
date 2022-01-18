@@ -1,4 +1,4 @@
-package com.avans.avd.thebookclub
+package com.ittinder.ittinder
 
 import android.app.Activity
 import android.content.Context
