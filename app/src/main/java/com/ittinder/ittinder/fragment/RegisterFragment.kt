@@ -54,7 +54,7 @@ class RegisterFragment : Fragment() {
         return binding.root
     }
 
-    fun checkGender(): String {
+    private fun checkGender(): String {
         var gender = ""
 
         if (binding.radioButtonMen.isChecked) {
@@ -67,7 +67,7 @@ class RegisterFragment : Fragment() {
         return gender
     }
 
-    fun checkGenderPreference(): String {
+    private fun checkGenderPreference(): String {
         var genderPreference = ""
 
         if (binding.radioButtonMenPref.isChecked) {

@@ -159,7 +159,7 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    fun checkGender(): String {
+    private fun checkGender(): String {
         var gender = ""
 
         if (binding.radioButtonMen.isChecked) {
@@ -172,7 +172,7 @@ class ProfileFragment : Fragment() {
         return gender
     }
 
-    fun genderRadioButtons(user : User) {
+    private fun genderRadioButtons(user : User) {
         if (user.gender == "Male"){
             binding.radioButtonMen.isChecked = true
         }
@@ -184,7 +184,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    fun checkGenderPreference(): String {
+    private fun checkGenderPreference(): String {
         var genderPreference = ""
 
         if (binding.radioButtonMenPref.isChecked) {
@@ -202,7 +202,7 @@ class ProfileFragment : Fragment() {
         return genderPreference
     }
 
-    fun genderPrefRadioButtons(user : User) {
+    private fun genderPrefRadioButtons(user : User) {
         if (user.interestedInGender == "Male"){
             binding.radioButtonMenPref.isChecked = true
         }
