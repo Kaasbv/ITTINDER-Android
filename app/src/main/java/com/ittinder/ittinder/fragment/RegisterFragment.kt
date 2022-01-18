@@ -25,10 +25,10 @@ class RegisterFragment : Fragment() {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         val viewModel : UserViewModel by viewModels()
-
-
+        //Listener for register button
         binding.registerSubmit.setOnClickListener {
             checkGender()
+            //Create register object with values
             val user = RegisterObject(
                 binding.EditTextFirstName.text.toString(),
                 binding.EditTextMiddleName.text.toString(),
@@ -41,6 +41,7 @@ class RegisterFragment : Fragment() {
                 checkGenderPreference()
             )
 
+            //Run viewmodel register and observe for response
             viewModel.register(user).observe(this) { successful ->
                 if (successful) {
                     Toast.makeText(context, "Successfully registered", Toast.LENGTH_SHORT).show()
@@ -54,7 +55,7 @@ class RegisterFragment : Fragment() {
         return binding.root
     }
 
-    private fun checkGender(): String {
+    private fun checkGender(): String {//Get gender from radio buttons
         var gender = ""
 
         if (binding.radioButtonMen.isChecked) {
@@ -67,7 +68,7 @@ class RegisterFragment : Fragment() {
         return gender
     }
 
-    private fun checkGenderPreference(): String {
+    private fun checkGenderPreference(): String {//Get gender preference from radio buttons
         var genderPreference = ""
 
         if (binding.radioButtonMenPref.isChecked) {

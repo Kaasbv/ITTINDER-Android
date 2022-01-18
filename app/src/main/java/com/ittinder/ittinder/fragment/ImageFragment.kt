@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ittinder.ittinder.databinding.FragmentImageListBinding
 
-
+//Not used
 class ImageFragment : Fragment() {
     private var _binding: FragmentImageListBinding? = null
     private val binding get() = _binding!!

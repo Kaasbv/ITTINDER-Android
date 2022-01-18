@@ -51,6 +51,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Check if user id is in preferences and if so, redirect to swipe screen
         val pref = activity!!.getPreferences(Context.MODE_PRIVATE)
         val userId: Long = pref.getLong("user_id", 0)
 
@@ -58,6 +59,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSwipeScreen())
         }
 
+        //Add observers for validation
         val emailEditText = binding.emailAddress.editText
         val passwordEditText = binding.password.editText
         val loginButton = binding.login
@@ -74,6 +76,7 @@ class LoginFragment : Fragment() {
             loginButton.isEnabled = isValid
         }
 
+        //Set listeners for buttons
         val viewModel: UserViewModel by viewModels();
 
         loginButton.setOnClickListener {

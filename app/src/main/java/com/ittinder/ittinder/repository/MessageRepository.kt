@@ -22,7 +22,7 @@ object MessageRepository {
                 it.chat!!.id
             ))
         }
-
+        //Insert into database
         dao(context).insertMessages(messageEntities.toList())
     }
 

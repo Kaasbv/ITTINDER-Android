@@ -59,6 +59,7 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
                 user.latitude = latitude
             }
             setDataUser(user)
+            //Update user with lat lon
             userModel.updateUser(ownUserData[0], requireActivity())
         }
     }
@@ -113,16 +114,18 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
         requireActivity().invalidateMenu()
 
         val userModel : UserViewModel by viewModels()
-
+        //Grab userstreams
         userModel.getUserStream(activity!!)
+        //Observer user stream response
         userModel.randomUserStreamResponse.observe(this) {
-            if (userModel.randomUserStreamResponse.value.isNullOrEmpty() ) {
+            if (userModel.randomUserStreamResponse.value.isNullOrEmpty() ) {//If no users found
                 binding.Name.text = "No available users to swipe"
                 binding.Name.textSize = 25F
                 binding.comma.text = ""
                 binding.description.text = ""
             }
             else {
+                //Grab own user as well
                 userModel.getUser(activity!!)
                 userModel.user.observe(this) {
                     val returnValue = userModel.user.value
@@ -133,6 +136,7 @@ class SwipeScreen : Fragment(R.layout.fragment_swipe_screen)  {
                     val json = userModel.randomUserStreamResponse.value?.elementAt(0)
                     if (json != null) {
                         setData(json)
+                        //Bind data to view
                         bindData(userData[0], ownUserData[0])
                     }
                 }

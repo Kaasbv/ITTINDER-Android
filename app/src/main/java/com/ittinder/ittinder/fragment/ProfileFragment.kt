@@ -43,10 +43,12 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        //Get user
         userViewModel.getUser(activity!!)
 
+        //Set on click listener for update burron
         binding.updateProfileButton.setOnClickListener {
-
+            //Bind field values on user
             val user: User = userViewModel.user.value!!
             user.firstName = binding.EditTextFirstName.text.toString()
             user.middleName = binding.EditTextMiddleName.text.toString()
@@ -58,10 +60,11 @@ class ProfileFragment : Fragment() {
             user.middleName = binding.EditTextMiddleName.text.toString()
             user.gender = checkGender()
             user.interestedInGender = checkGenderPreference()
-
+            //Run update
             userViewModel.updateUser(user, activity!!)
         }
 
+        //Observer for get user and bind if it works
         userViewModel.user.observe(this) {
             val returnValue = userViewModel.user.value
             if (returnValue != null) {
@@ -69,6 +72,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        //Add event listener for upload image
         binding.profileImageButton.setOnClickListener {
             capturePhoto()
         }
@@ -76,7 +80,7 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun bindData(user: User){
+    private fun bindData(user: User){//Bind data on fields
         binding.EditTextFirstName.setText(user.firstName)
         binding.EditTextMiddleName.setText(user.middleName)
         binding.EditTextSurname.setText(user.surname)
@@ -95,6 +99,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun capturePhoto() {
+        //Create intent for capturing photo
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             val photoFile: File? = try {
                 createImageFile()
@@ -116,6 +121,7 @@ class ProfileFragment : Fragment() {
 
     @Throws(IOException::class)
     private fun createImageFile(): File {
+        //Create temporary file for image
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
@@ -129,13 +135,17 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        //Handler for camera response
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
+            //Grab input stream
             val selectedImageUri = Uri.fromFile(File(currentPhotoPath))
             val ims: InputStream? =
                 requireContext().contentResolver.openInputStream(selectedImageUri)
 
             if (ims != null) {
+                //send input stream to upload image
                 userViewModel.uploadImage(requireActivity(), ims).observe(this){ user ->
+                    //If image is updated rebind data
                     bindData(user)
                 }
             }
@@ -147,7 +157,7 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    private fun checkGender(): String {
+    private fun checkGender(): String {//Grab gender from input fields
         var gender = ""
 
         if (binding.radioButtonMen.isChecked) {
@@ -160,7 +170,7 @@ class ProfileFragment : Fragment() {
         return gender
     }
 
-    private fun genderRadioButtons(user : User) {
+    private fun genderRadioButtons(user : User) {//set radio buttons for gender
         if (user.gender == "Male"){
             binding.radioButtonMen.isChecked = true
         }
@@ -172,7 +182,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun checkGenderPreference(): String {
+    private fun checkGenderPreference(): String {//Grab gender preference from radio buttons
         var genderPreference = ""
 
         if (binding.radioButtonMenPref.isChecked) {
@@ -190,7 +200,7 @@ class ProfileFragment : Fragment() {
         return genderPreference
     }
 
-    private fun genderPrefRadioButtons(user : User) {
+    private fun genderPrefRadioButtons(user : User) {//Set gender preference
         if (user.interestedInGender == "Male"){
             binding.radioButtonMenPref.isChecked = true
         }
