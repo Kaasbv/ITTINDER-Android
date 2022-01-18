@@ -38,61 +38,6 @@ class ProfileFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 200
     val userViewModel : UserViewModel by viewModels()
 
-    fun checkGender(): String {
-        var gender = ""
-
-        if (binding.radioButtonMen.isChecked) {
-            gender = "Male"
-        } else if (binding.radioButtonWomen.isChecked) {
-            gender = "Female"
-        } else if (binding.radioButtonOther.isChecked) {
-            gender = "Non Binary"
-        }
-        return gender
-    }
-
-    fun genderRadioButtons(user : User) {
-        if (user.gender == "Male"){
-            binding.radioButtonMen.isChecked = true
-        }
-        else if (user.gender == "Female"){
-            binding.radioButtonWomen.isChecked = true
-        }
-        else if (user.gender == "Non Binary"){
-            binding.radioButtonOther.isChecked = true
-        }
-    }
-
-    fun checkGenderPreference(): String {
-        var genderPreference = ""
-
-        if (binding.radioButtonMenPref.isChecked) {
-            genderPreference = "Male"
-        }
-        else if (binding.radioButtonWomenPref.isChecked) {
-            genderPreference = "Female"
-        }
-        else if (binding.radioButtonOtherPref.isChecked) {
-            genderPreference = "Non Binary"
-        }
-        else if (binding.radioButtonDoesntMatterPref.isChecked) {
-            genderPreference = "Doesn't matter"
-        }
-        return genderPreference
-    }
-
-    fun genderPrefRadioButtons(user : User) {
-        if (user.interestedInGender == "Male"){
-            binding.radioButtonMenPref.isChecked = true
-        }
-        else if (user.interestedInGender == "Female"){
-            binding.radioButtonWomenPref.isChecked = true
-        }
-        else if (user.interestedInGender == "Non Binary"){
-            binding.radioButtonOtherPref.isChecked = true
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -212,5 +157,60 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun checkGender(): String {
+        var gender = ""
+
+        if (binding.radioButtonMen.isChecked) {
+            gender = "Male"
+        } else if (binding.radioButtonWomen.isChecked) {
+            gender = "Female"
+        } else if (binding.radioButtonOther.isChecked) {
+            gender = "Non Binary"
+        }
+        return gender
+    }
+
+    fun genderRadioButtons(user : User) {
+        if (user.gender == "Male"){
+            binding.radioButtonMen.isChecked = true
+        }
+        else if (user.gender == "Female"){
+            binding.radioButtonWomen.isChecked = true
+        }
+        else if (user.gender == "Non Binary"){
+            binding.radioButtonOther.isChecked = true
+        }
+    }
+
+    fun checkGenderPreference(): String {
+        var genderPreference = ""
+
+        if (binding.radioButtonMenPref.isChecked) {
+            genderPreference = "Male"
+        }
+        else if (binding.radioButtonWomenPref.isChecked) {
+            genderPreference = "Female"
+        }
+        else if (binding.radioButtonOtherPref.isChecked) {
+            genderPreference = "Non Binary"
+        }
+        else if (binding.radioButtonDoesntMatterPref.isChecked) {
+            genderPreference = "Doesn't matter"
+        }
+        return genderPreference
+    }
+
+    fun genderPrefRadioButtons(user : User) {
+        if (user.interestedInGender == "Male"){
+            binding.radioButtonMenPref.isChecked = true
+        }
+        else if (user.interestedInGender == "Female"){
+            binding.radioButtonWomenPref.isChecked = true
+        }
+        else if (user.interestedInGender == "Non Binary"){
+            binding.radioButtonOtherPref.isChecked = true
+        }
     }
 }

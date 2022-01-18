@@ -18,37 +18,6 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-    fun checkGender(): String {
-        var gender = ""
-
-        if (binding.radioButtonMen.isChecked) {
-            gender = "Male"
-        } else if (binding.radioButtonWomen.isChecked) {
-            gender = "Female"
-        } else if (binding.radioButtonOther.isChecked) {
-            gender = "Non Binary"
-        }
-        return gender
-    }
-
-    fun checkGenderPreference(): String {
-        var genderPreference = ""
-
-        if (binding.radioButtonMenPref.isChecked) {
-            genderPreference = "Male"
-        }
-        else if (binding.radioButtonWomenPref.isChecked) {
-            genderPreference = "Female"
-        }
-        else if (binding.radioButtonOtherPref.isChecked) {
-            genderPreference = "Non Binary"
-        }
-        else if (binding.radioButtonDoesntMatterPref.isChecked) {
-            genderPreference = "Doesn't matter"
-        }
-        return genderPreference
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -83,6 +52,37 @@ class RegisterFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    fun checkGender(): String {
+        var gender = ""
+
+        if (binding.radioButtonMen.isChecked) {
+            gender = "Male"
+        } else if (binding.radioButtonWomen.isChecked) {
+            gender = "Female"
+        } else if (binding.radioButtonOther.isChecked) {
+            gender = "Non Binary"
+        }
+        return gender
+    }
+
+    fun checkGenderPreference(): String {
+        var genderPreference = ""
+
+        if (binding.radioButtonMenPref.isChecked) {
+            genderPreference = "Male"
+        }
+        else if (binding.radioButtonWomenPref.isChecked) {
+            genderPreference = "Female"
+        }
+        else if (binding.radioButtonOtherPref.isChecked) {
+            genderPreference = "Non Binary"
+        }
+        else if (binding.radioButtonDoesntMatterPref.isChecked) {
+            genderPreference = "Doesn't matter"
+        }
+        return genderPreference
     }
 
 }
