@@ -76,7 +76,7 @@ class ProfileFragment : Fragment() {
                 clear()
                 apply()
             }
-            //Set menu on swipescreen
+            //Remove menu on return
             (activity as MainActivity).showMenu = false
             requireActivity().invalidateMenu()
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
