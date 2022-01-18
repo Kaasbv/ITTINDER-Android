@@ -12,19 +12,19 @@ class MessagesAdapter(
     private val layoutInflater: LayoutInflater,
     private val getData: (MessagesAdapter, Int) -> Unit
 ) : RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
-    private val cachedData = mutableMapOf<Int,MessageEntity>()
-    private var length: Int = 0
+    private val cachedData = mutableMapOf<Int,MessageEntity>() //Holds cache of messages
+    private var length: Int = 0 //Holds current length of messages in room
 
-    fun refresh(newLength: Int = length) {
+    fun refresh(newLength: Int = length) {//Refresh recyckler view and possibly update length
         length = newLength
         notifyDataSetChanged()
     }
 
-    fun putData(position: Int, message: MessageEntity){
+    fun putData(position: Int, message: MessageEntity){//Put message in cache
         cachedData[position] = message
     }
 
-    fun resetData(){
+    fun resetData(){//Reset cache
         cachedData.clear()
     }
 
@@ -34,12 +34,13 @@ class MessagesAdapter(
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
+        //Grab message from message
         var message: MessageEntity? = cachedData[position];
-        if(message == null){
+        if(message == null){//If message doesnt exists in cache initiate grabbing at and while waiting put in a placeholder
             getData(this, position)
             cachedData[position] = MessageEntity(1, "Loading...", "Loading...", "", 1, 1)
         }
-        holder.bindData(cachedData[position]!!)
+        holder.bindData(cachedData[position]!!) //bind view
     }
 
      override fun getItemCount(): Int {
@@ -54,6 +55,7 @@ class MessagesAdapter(
         private val chatMessageView: TextView =  containerView.findViewById(R.id.item_message_message)
 
         fun bindData(message: MessageEntity) {
+            //Bind data on view
             chatNameView.text = message.name
             chatMessageView.text = message.message
         }

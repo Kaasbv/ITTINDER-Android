@@ -23,9 +23,10 @@ class ChatsAdapter(
     private val chatsData = mutableListOf<Chat>()
 
     fun setData(chatsData: List<Chat>) {
+        //Clear chats data and set to mutable list
         this.chatsData.clear()
         this.chatsData.addAll(chatsData)
-
+        //Let recycler view know data is changed
         notifyDataSetChanged()
     }
 
@@ -36,10 +37,10 @@ class ChatsAdapter(
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val current = chatsData[position]
-        holder.itemView.setOnClickListener {
+        holder.itemView.setOnClickListener {//set on click listener on item
             onItemClicked(current)
         }
-        holder.bindData(current)
+        holder.bindData(current) //Bind data to view
     }
 
      override fun getItemCount(): Int {
@@ -55,14 +56,16 @@ class ChatsAdapter(
         val chatPhotoView: ImageView = containerView.findViewById(R.id.item_chat_photo)
 
         fun bindData(chat: Chat) {
+            //Get user from chat which isnt current user
             val user: User = if (chat.initiatedUser.id != userId) chat.initiatedUser else chat.affectedUser
 
-            var image: String = if(user.image != null){
+            var image: String = if(user.image != null){//check if image otherwise use default
                 BASE_URL + user.image
             }else {
                 "https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/people/m/ey-matthew-harold-meta.jpg"
             }
 
+            //Bind data on view
             imageLoader.loadImage(image, chatPhotoView)
             chatNameView.text = user.firstName
             chatLastMessage.text = if(chat.lastMessage != null) chat.lastMessage.message else ""

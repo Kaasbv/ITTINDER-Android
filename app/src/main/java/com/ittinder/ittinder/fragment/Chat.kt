@@ -83,9 +83,10 @@ class Chat : Fragment() {
             })
         }
 
+        //Bind to button for sending messages
         binding.chatSubmitButton.setOnClickListener {
             viewModel.postMessage(chatId, binding.chatEdittext.text.toString(), activity!!)
-            binding.chatEdittext.text.clear()
+            binding.chatEdittext.text.clear() //clear text field
         }
 
         return binding.root

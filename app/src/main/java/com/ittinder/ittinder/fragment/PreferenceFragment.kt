@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ittinder.ittinder.databinding.FragmentPreferencesBinding
 
+//Not used
 class PreferenceFragment : Fragment() {
     private var _binding: FragmentPreferencesBinding? = null
     private val binding get() = _binding!!
