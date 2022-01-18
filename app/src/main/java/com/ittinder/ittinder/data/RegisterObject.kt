@@ -7,5 +7,7 @@ class RegisterObject (
     var dateOfBirth: String,
     var email: String,
     var description: String,
-    var password: String
+    var password: String,
+    var gender: String,
+    var interestedInGender: String
 )
