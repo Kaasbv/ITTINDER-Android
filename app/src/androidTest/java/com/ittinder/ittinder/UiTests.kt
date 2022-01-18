@@ -8,7 +8,9 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.GrantPermissionRule
 import org.junit.Before
+import org.junit.Rule
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,6 +19,12 @@ import org.junit.runner.RunWith
 class UiTests {
     val message = "Hoi"
     val firstname = "Cynthia"
+
+    @get:Rule
+    val permissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        android.Manifest.permission.ACCESS_COARSE_LOCATION,
+        android.Manifest.permission.ACCESS_NETWORK_STATE
+    )
 
     @Before
     fun setup() {
