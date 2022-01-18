@@ -10,6 +10,7 @@ import com.ittinder.ittinder.data.LoginObject
 import com.ittinder.ittinder.data.RegisterObject
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.service.UserApi
+import com.ittinder.ittinder.service.UserApiService
 
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
@@ -20,7 +21,9 @@ import java.lang.Exception
 
 private const val TAG = "UserViewModel"
 
-class UserViewModel : BaseViewModel() {
+class UserViewModel(
+    private val userApiService: UserApiService = UserApi.retrofitService
+) : BaseViewModel() {
     private val _randomUserStreamResponse: MutableLiveData<List<User>> = MutableLiveData()
     val randomUserStreamResponse: LiveData<List<User>>
         get() = _randomUserStreamResponse
@@ -28,7 +31,7 @@ class UserViewModel : BaseViewModel() {
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
 
-    private fun api() = UserApi.retrofitService
+    private fun api() = userApiService
 
     fun getUser(activity: Activity) {
         viewModelScope.launch {
@@ -55,11 +58,10 @@ class UserViewModel : BaseViewModel() {
     fun login(email: String, password: String, activity: Activity): MutableLiveData<Boolean> {
         val response = MutableLiveData<Boolean>()
 
-        val pref = activity?.getPreferences(Context.MODE_PRIVATE)
-
         viewModelScope.launch {
             try{
                 val apiResponse = api().loginUser(LoginObject(email, password))
+                val pref = activity.getPreferences(Context.MODE_PRIVATE)
                 with (pref.edit()) {
                     putString("session_id", apiResponse.sessionId)
                     putLong("user_id", apiResponse.user.id)
@@ -68,6 +70,7 @@ class UserViewModel : BaseViewModel() {
 
                 response.value = true
             }catch(e: Exception){
+                throw e
                 response.value = false
             }
         }
@@ -84,17 +87,15 @@ class UserViewModel : BaseViewModel() {
                 Log.e(TAG, "Failed to retrieve users from getUserStream")
                 throw e
             }
-
         }
     }
 
     fun register(user: RegisterObject): MutableLiveData<Boolean>
     {
         val response = MutableLiveData<Boolean>()
-        Log.i("Ding", "Is send broski")
         viewModelScope.launch {
             try {
-                UserApi.retrofitService.register(user)
+                api().register(user)
                 response.value = true
             }catch(e: Exception){
                 response.value = false
