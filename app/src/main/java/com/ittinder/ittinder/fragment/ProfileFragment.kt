@@ -73,18 +73,6 @@ class ProfileFragment : Fragment() {
             capturePhoto()
         }
 
-        binding.profileLogout.setOnClickListener {
-            val pref = requireActivity().getPreferences(Context.MODE_PRIVATE)
-            with (pref!!.edit()) {
-                clear()
-                apply()
-            }
-            //Remove menu on return
-            (activity as MainActivity).showMenu = false
-            requireActivity().invalidateMenu()
-            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
-        }
-
         return binding.root
     }
 
