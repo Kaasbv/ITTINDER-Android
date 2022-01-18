@@ -71,10 +71,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
         return true
     }
 
-    fun setShowMenuState(value: Boolean){
-        showMenu = value
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
 

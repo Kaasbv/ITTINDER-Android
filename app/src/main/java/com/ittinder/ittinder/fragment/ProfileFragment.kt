@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.ittinder.ittinder.MainActivity
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.databinding.FragmentProfileBinding
 import com.ittinder.ittinder.util.CoilImageLoader
@@ -75,6 +76,9 @@ class ProfileFragment : Fragment() {
                 clear()
                 apply()
             }
+            //Set menu on swipescreen
+            (activity as MainActivity).showMenu = false
+            requireActivity().invalidateMenu()
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
         }
 
