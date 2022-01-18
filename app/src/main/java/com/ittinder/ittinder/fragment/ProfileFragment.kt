@@ -212,5 +212,8 @@ class ProfileFragment : Fragment() {
         else if (user.interestedInGender == "Non Binary"){
             binding.radioButtonOtherPref.isChecked = true
         }
+        else if (user.interestedInGender == "Doesn't matter"){
+            binding.radioButtonDoesntMatterPref.isChecked = true
+        }
     }
 }
