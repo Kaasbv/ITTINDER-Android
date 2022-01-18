@@ -46,6 +46,7 @@ class ProfileFragment : Fragment() {
         userViewModel.getUser(activity!!)
 
         binding.updateProfileButton.setOnClickListener {
+
             val user: User = userViewModel.user.value!!
             user.firstName = binding.EditTextFirstName.text.toString()
             user.middleName = binding.EditTextMiddleName.text.toString()
@@ -55,6 +56,8 @@ class ProfileFragment : Fragment() {
             user.email = binding.EditTextEmail.text.toString()
             user.password = binding.EditTextPassword.text.toString()
             user.middleName = binding.EditTextMiddleName.text.toString()
+            user.gender = checkGender()
+            user.interestedInGender = checkGenderPreference()
 
             userViewModel.updateUser(user, activity!!)
         }
@@ -92,6 +95,9 @@ class ProfileFragment : Fragment() {
         binding.EditTextDoB.setText(user.dateOfBirth)
         binding.EditDescription.setText(user.description)
         binding.EditTextEmail.setText(user.email)
+        genderRadioButtons(user)
+        genderPrefRadioButtons(user)
+
         if (user.image == null) {
             imageLoader.loadImage("https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/people/m/ey-matthew-harold-meta.jpg", binding.profileImageView)
         }
@@ -151,5 +157,60 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun checkGender(): String {
+        var gender = ""
+
+        if (binding.radioButtonMen.isChecked) {
+            gender = "Male"
+        } else if (binding.radioButtonWomen.isChecked) {
+            gender = "Female"
+        } else if (binding.radioButtonOther.isChecked) {
+            gender = "Non Binary"
+        }
+        return gender
+    }
+
+    private fun genderRadioButtons(user : User) {
+        if (user.gender == "Male"){
+            binding.radioButtonMen.isChecked = true
+        }
+        else if (user.gender == "Female"){
+            binding.radioButtonWomen.isChecked = true
+        }
+        else if (user.gender == "Non Binary"){
+            binding.radioButtonOther.isChecked = true
+        }
+    }
+
+    private fun checkGenderPreference(): String {
+        var genderPreference = ""
+
+        if (binding.radioButtonMenPref.isChecked) {
+            genderPreference = "Male"
+        }
+        else if (binding.radioButtonWomenPref.isChecked) {
+            genderPreference = "Female"
+        }
+        else if (binding.radioButtonOtherPref.isChecked) {
+            genderPreference = "Non Binary"
+        }
+        else if (binding.radioButtonDoesntMatterPref.isChecked) {
+            genderPreference = "Doesn't matter"
+        }
+        return genderPreference
+    }
+
+    private fun genderPrefRadioButtons(user : User) {
+        if (user.interestedInGender == "Male"){
+            binding.radioButtonMenPref.isChecked = true
+        }
+        else if (user.interestedInGender == "Female"){
+            binding.radioButtonWomenPref.isChecked = true
+        }
+        else if (user.interestedInGender == "Non Binary"){
+            binding.radioButtonOtherPref.isChecked = true
+        }
     }
 }

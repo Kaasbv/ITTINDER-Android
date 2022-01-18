@@ -20,7 +20,7 @@
     <string name="middlename">Middle name</string>
     <string name="surname">Surname</string>
     <string name="your_gender">Your gender</string>
-    <string name="date_of_birth">Date of birth</string>
+    <string name="date_of_birth">Date of birth (YYYY-MM-DD)</string>
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
     <string name="continue_option">continue</string>
@@ -29,7 +29,7 @@
     <string name="what_are_you_looking_for">What are you looking for?</string>
     <string name="men">Men</string>
     <string name="women">Women</string>
-    <string name="other">Other</string>
+    <string name="other">Non Binary</string>
     <string name="doesnt_matter">Doesn\'t matter</string>
     <string name="programming_languages">Your programming languages:</string>
     <string name="register">Register</string>

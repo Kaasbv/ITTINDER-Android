@@ -167,7 +167,7 @@
             android:id="@+id/textInputDoB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/date_of_birth"
+            android:hint= "@string/date_of_birth"
             android:layout_marginStart="32dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="32dp"
@@ -210,6 +210,89 @@
                 tools:text="Ik ben Jan en heb erg veel zin om te daten. Ik hou van lange wandelingen in een MMO RPG. Daarnaast vis ik graag online naar informatie en sleutel ik regelmatig aan mijn desktop." />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/gender_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/what_are_you_looking_for"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputDescription" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:checkedButton="@+id/radio_button_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="@id/gender_question"
+            app:layout_constraintTop_toBottomOf="@id/gender_question">
+
+            <RadioButton
+                android:id="@+id/radio_button_men"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/men"/>
+            <RadioButton
+                android:id="@+id/radio_button_women"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/women"/>
+            <RadioButton
+                android:id="@+id/radio_button_other"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/other"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/gender_question_pref"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/what_are_you_looking_for"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup_pref"
+            android:checkedButton="@+id/radio_button_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="@id/gender_question_pref"
+            app:layout_constraintTop_toBottomOf="@id/gender_question_pref">
+
+            <RadioButton
+                android:id="@+id/radio_button_men_pref"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/men"/>
+            <RadioButton
+                android:id="@+id/radio_button_women_pref"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/women"/>
+            <RadioButton
+                android:id="@+id/radio_button_other_pref"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/other"/>
+            <RadioButton
+                android:id="@+id/radio_button_doesnt_matter_pref"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/doesnt_matter"/>
+        </RadioGroup>
+
         <Button
             android:id="@+id/register_submit"
             android:layout_width="wrap_content"
@@ -223,7 +306,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputDescription"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup_pref"
             app:layout_constraintVertical_bias="0.2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
