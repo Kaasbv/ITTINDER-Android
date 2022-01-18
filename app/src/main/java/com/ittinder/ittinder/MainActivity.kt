@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     lateinit var navController: NavController
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
+    var showMenu = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +64,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
+        if(showMenu) {
+            menuInflater.inflate(R.menu.menu, menu)
+        }
+
         return true
     }
 

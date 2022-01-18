@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.ittinder.ittinder.MainActivity
 import com.ittinder.ittinder.data.User
 import com.ittinder.ittinder.databinding.FragmentProfileBinding
 import com.ittinder.ittinder.util.CoilImageLoader
@@ -70,11 +71,14 @@ class ProfileFragment : Fragment() {
         }
 
         binding.profileLogout.setOnClickListener {
-            val pref = activity?.getPreferences(Context.MODE_PRIVATE)
+            val pref = requireActivity().getPreferences(Context.MODE_PRIVATE)
             with (pref!!.edit()) {
                 clear()
                 apply()
             }
+            //Remove menu on return
+            (activity as MainActivity).showMenu = false
+            requireActivity().invalidateMenu()
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
         }
 
@@ -98,14 +102,11 @@ class ProfileFragment : Fragment() {
 
     private fun capturePhoto() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-
-            // Create the File where the photo should go
             val photoFile: File? = try {
                 createImageFile()
             } catch (ex: IOException) {
                 null
             }
-            // Continue only if the File was successfully created
             photoFile?.also {
                 val photoURI: Uri = FileProvider.getUriForFile(
                     requireContext(),
@@ -121,7 +122,6 @@ class ProfileFragment : Fragment() {
 
     @Throws(IOException::class)
     private fun createImageFile(): File {
-        // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
@@ -129,7 +129,6 @@ class ProfileFragment : Fragment() {
             ".jpg", /* suffix */
             storageDir /* directory */
         ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
             currentPhotoPath = absolutePath
         }
     }
@@ -137,14 +136,14 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
-            // put data in inputstream
             val selectedImageUri = Uri.fromFile(File(currentPhotoPath))
             val ims: InputStream? =
                 requireContext().contentResolver.openInputStream(selectedImageUri)
 
-            // if clicked on button, these arguments get passed to function addImageToBook
             if (ims != null) {
-                userViewModel.uploadImage(requireActivity(), ims)
+                userViewModel.uploadImage(requireActivity(), ims).observe(this){ user ->
+                    bindData(user)
+                }
             }
         }
     }

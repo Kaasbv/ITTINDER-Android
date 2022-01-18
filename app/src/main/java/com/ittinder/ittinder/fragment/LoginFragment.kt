@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
+import com.ittinder.ittinder.R
 import com.ittinder.ittinder.databinding.FragmentLoginBinding
 import com.ittinder.ittinder.viewmodel.UserViewModel
 

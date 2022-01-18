@@ -65,7 +65,7 @@ class ChatsAdapter(
 
             imageLoader.loadImage(image, chatPhotoView)
             chatNameView.text = user.firstName
-            chatLastMessage.text = chat.lastMessage!!.message.toString()
+            chatLastMessage.text = if(chat.lastMessage != null) chat.lastMessage.message else ""
         }
     }
 }

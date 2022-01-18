@@ -104,7 +104,10 @@ class UserViewModel : BaseViewModel() {
         return response
     }
 
-    fun uploadImage(activity: Activity, inputStream: InputStream) {
+    fun uploadImage(activity: Activity, inputStream: InputStream): MutableLiveData<User>
+    {
+        var response = MutableLiveData<User>()
+
         viewModelScope.launch {
             val part = MultipartBody.Part.createFormData(
                 "multipartFile", "image.jpg", RequestBody.create(
@@ -112,7 +115,10 @@ class UserViewModel : BaseViewModel() {
                     inputStream.readBytes()
                 )
             )
-            api().uploadImage("session_id=" + getSessionId(activity), part)
+            val user: User = api().uploadImage("session_id=" + getSessionId(activity), part)
+            response.value = user
         }
+
+        return response
     }
 }
