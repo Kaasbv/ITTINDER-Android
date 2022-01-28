@@ -70,7 +70,6 @@ class UserViewModel(
 
                 response.value = true
             }catch(e: Exception){
-                throw e
                 response.value = false
             }
         }
@@ -85,7 +84,6 @@ class UserViewModel(
                 _randomUserStreamResponse.value = randomUsers
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to retrieve users from getUserStream")
-                throw e
             }
         }
     }

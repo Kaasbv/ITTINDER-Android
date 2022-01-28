@@ -31,7 +31,7 @@ class UiTests {
         // Arrange
         launchActivity<MainActivity>()
         //Login
-        onView(withId(R.id.emailAddressEditText)).perform(replaceText("test2@gmail.com"))
+        onView(withId(R.id.emailAddressEditText)).perform(replaceText("paul@gmail.com"))
         onView(withId(R.id.passwordEditText)).perform(replaceText("Start1234%"))
         onView(withId(R.id.login)).perform(click())
         Thread.sleep(1000)

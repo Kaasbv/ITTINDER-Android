@@ -2,6 +2,7 @@ package com.ittinder.ittinder.service
 
 import com.ittinder.ittinder.data.Chat
 import com.ittinder.ittinder.data.Message
+import com.ittinder.ittinder.data.MessagesWithIso
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -11,7 +12,7 @@ import retrofit2.http.*
 import retrofit2.http.Header
 
 
-private const val BASE_URL = "http://10.0.2.2:8080"
+private const val BASE_URL = "http://51.158.171.172:8080"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -31,6 +32,9 @@ interface ChatApiService {
 
     @GET("/user/messages/polling")
     suspend fun listMessagesPolling(@Header("Cookie") session_id: String, @Query("secondsRange") secondsRange: Int): List<Message>
+
+    @GET("/user/messages/lastSyncBased")
+    suspend fun listMessagesLastSyncBased(@Header("Cookie") session_id: String, @Query("lastSyncIso") lastSyncIso: String): MessagesWithIso
 
     @POST("/chat/{chatId}/messages")
     suspend fun postMessage(@Header("Cookie") session_id: String, @Path("chatId") chatId: Long, @Body message: String)

@@ -2,6 +2,7 @@ package com.ittinder.ittinder.viewmodel
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -22,15 +23,23 @@ class MessageViewModel : BaseViewModel() {
 
     fun sync(context: Context, activity: Activity, chatId: Long) {
         //First get last sync date
-        val currentIso: String = Instant.now().toString()
+        val pref = activity.getPreferences(Context.MODE_PRIVATE)
+        val lastSyncIso = pref.getString("last_sync_iso", "").toString()
+
+        Log.i("Fuck", lastSyncIso)
 
         viewModelScope.launch {
-            val messages: List<Message> = api().listMessagesPolling("session_id=" + getSessionId(activity), 1)
+            val response = api().listMessagesLastSyncBased("session_id=" + getSessionId(activity), lastSyncIso)
 
-            if(messages.isNotEmpty()){
-                MessageRepository.insertMessages(context, messages)
+            with(pref.edit()){
+                this.putString("last_sync_iso", response.currentIso)
+                apply()
+            }
+
+            if(response.messages.isNotEmpty()){
+                MessageRepository.insertMessages(context, response.messages)
                 count = MessageRepository.getMessagesCount(context, chatId)
-                _lastChanged.value = currentIso
+                _lastChanged.value = response.currentIso
             }
         }
     }

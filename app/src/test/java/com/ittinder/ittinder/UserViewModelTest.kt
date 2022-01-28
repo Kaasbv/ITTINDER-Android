@@ -87,7 +87,7 @@ class UserViewModelTest {
         coEvery { preferencesEdit.putLong(any(), any()) } returns preferencesEdit
         coEvery { preferencesEdit.apply() } returns Unit
 
-        val response = sut.login("henk@gmail.com", "Start1234%", activity)
+        val response = sut.login("paul@gmail.com", "Start1234%", activity)
 
         coVerify { preferencesEdit.putString(any(), any()) }
         coVerify { preferencesEdit.putLong(any(), any()) }

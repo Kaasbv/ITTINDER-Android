@@ -73,7 +73,7 @@ class LoginFragment : Fragment() {
         }
 
         isValidLiveData.observe(this.viewLifecycleOwner) { isValid ->
-            loginButton.isEnabled = isValid
+            loginButton.isEnabled = true
         }
 
         //Set listeners for buttons
